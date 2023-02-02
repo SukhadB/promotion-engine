@@ -20,9 +20,19 @@ public class PromotionEngine {
 			
 			double totalCostofProductAPostPromotion = (countOfProductA/3 * 130) + (countOfProductA%3 * 50); 
 			double totalCostofProductBPostPromotion = (countOfProductB/2 * 45) + (countOfProductB%2 * 30); 
+			double totalCostofProductCPostPromotion = 0;
+			double totalCostofProductDPostPromotion = 0;
 			
-			double totalCostofProductCPostPromotion = (countOfProductC * 20); 
-			double totalCostofProductDPostPromotion = (countOfProductD * 15);		
+			if (countOfProductD == 0) {
+				totalCostofProductCPostPromotion = (countOfProductC * 20);
+			}
+			if (countOfProductD == 0) {
+				totalCostofProductDPostPromotion = (countOfProductD * 15);		
+			}
+			if (totalCostofProductCPostPromotion == 0 && totalCostofProductDPostPromotion == 0) {
+				
+			}
+			
 			promotedCost = totalCostofProductAPostPromotion + totalCostofProductBPostPromotion + totalCostofProductCPostPromotion+ totalCostofProductDPostPromotion;
 		}
 		return promotedCost;
