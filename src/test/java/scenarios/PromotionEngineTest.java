@@ -64,4 +64,22 @@ public class PromotionEngineTest {
 		Assert.assertEquals(115, cart.calculateTotalCartValue());
 		
 	}
+	
+	@Test
+	public void ScenarioA() {
+		PromotionEngine promotionEngine = new PromotionEngine();
+		
+		Cart cart = new Cart();
+		
+		Product product = new Product("A");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("C");
+		cart.addProduct(product);
+		
+		Assert.assertEquals(100, cart.calculateTotalCartValue());
+	}
+		
+	
 }
