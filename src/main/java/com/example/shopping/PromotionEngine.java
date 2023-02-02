@@ -33,6 +33,10 @@ public class PromotionEngine {
 				if (countOfProductC == countOfProductD) {
 					totalCostofProductDPostPromotion = (countOfProductD * 30);
 				}
+				if (countOfProductC > countOfProductD) {
+					totalCostofProductDPostPromotion = (countOfProductD  * 30);
+					totalCostofProductCPostPromotion = (countOfProductC - countOfProductD)  * 20;
+				}
 			}
 			
 			promotedCost = totalCostofProductAPostPromotion + totalCostofProductBPostPromotion + totalCostofProductCPostPromotion+ totalCostofProductDPostPromotion;
