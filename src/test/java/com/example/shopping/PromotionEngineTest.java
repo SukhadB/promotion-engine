@@ -1,15 +1,14 @@
-package scenarios;
+package com.example.shopping;
 
 import org.junit.Test;
 
+import com.example.shopping.Cart;
+import com.example.shopping.Product;
+import com.example.shopping.PromotionEngine;
+
 import junit.framework.Assert;
 
-public class PromotionEngineTest {
-	
-	public static void main(String[] args) {
-		System.out.println("Promotion Engine");
-	}
-	
+public class PromotionEngineTest {	
 	
 	@Test
 	public void promote() {

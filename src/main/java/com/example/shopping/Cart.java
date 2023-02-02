@@ -1,4 +1,4 @@
-package scenarios;
+package com.example.shopping;
 
 import java.util.ArrayList;
 import java.util.List;

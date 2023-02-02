@@ -1,4 +1,4 @@
-package scenarios;
+package com.example.shopping;
 
 public class Product {
 	
