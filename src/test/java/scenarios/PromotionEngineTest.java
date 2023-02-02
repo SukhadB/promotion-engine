@@ -72,7 +72,7 @@ public class PromotionEngineTest {
 	
 	@Test
 	public void ScenarioA() {
-		// Test case for scenario 1
+		// Test case for scenario A
 		PromotionEngine promotionEngine = new PromotionEngine();
 		
 		Cart cart = new Cart();
@@ -85,5 +85,38 @@ public class PromotionEngineTest {
 		cart.addProduct(product);
 		
 		Assert.assertEquals(100, cart.calculateTotalCartValue());
+	}
+	
+	@Test
+	public void TotalCartValueForScenariaB() {
+		// Test case for getting total cart value for scenario B
+		PromotionEngine promotionEngine = new PromotionEngine();
+		
+		Cart cart = new Cart();
+		
+		Product product = new Product("A");
+		cart.addProduct(product);
+		product = new Product("A");
+		cart.addProduct(product);
+		product = new Product("A");
+		cart.addProduct(product);
+		product = new Product("A");
+		cart.addProduct(product);
+		product = new Product("A");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("C");
+		cart.addProduct(product);
+		
+		Assert.assertEquals(420, cart.calculateTotalCartValue());
 	}
 }
