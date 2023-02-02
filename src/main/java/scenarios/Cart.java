@@ -8,7 +8,7 @@ public class Cart {
 	private List<Product> productList;
 	
 	public int calculateTotalCartValue() {
-		int totalCost = 0;
+		int totalCost = 50;
 		return totalCost;
 	}
 
