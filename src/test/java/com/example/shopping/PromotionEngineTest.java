@@ -279,5 +279,29 @@ public class PromotionEngineTest {
 
 		Assert.assertEquals(80.00, promotionEngine.promote(cart));
 	}
+	
+	@Test
+	public void ScenarioF() {
+		// Test case for getting total cart value when C is not added and product D is added
+		PromotionEngine promotionEngine = new PromotionEngine();
+		
+		Cart cart = new Cart();
+		
+		Product product = new Product("D");
+		cart.addProduct(product);
+		product = new Product("D");
+		cart.addProduct(product);
+		product = new Product("D");
+		cart.addProduct(product);
+
+		
+		product = new Product("C");
+		cart.addProduct(product);
+		product = new Product("C");
+		cart.addProduct(product);
+
+
+		Assert.assertEquals(75.00, promotionEngine.promote(cart));
+	}
 }
 
