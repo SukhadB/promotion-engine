@@ -7,6 +7,14 @@ public class Cart {
 	
 	private List<Product> productList;
 	
+	public List<Product> getProductList() {
+		return productList;
+	}
+
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+
 	public int calculateTotalCartValue() {
 		int totalCost = 0;
 		for (Product product : productList) {
