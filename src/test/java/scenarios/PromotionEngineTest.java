@@ -18,7 +18,7 @@ public class PromotionEngineTest {
 		
 		Cart cart = new Cart();
 				
-		Assert.assertEquals(0, promotionEngine.promote(cart));
+		Assert.assertEquals(0.00, promotionEngine.promote(cart));
 		
 	}
 
@@ -32,7 +32,7 @@ public class PromotionEngineTest {
 		Product product = new Product("A");
 		cart.addProduct(product);
 		
-		Assert.assertEquals(50, promotionEngine.promote(cart));
+		Assert.assertEquals(50.00, promotionEngine.promote(cart));
 		
 	}
 	
@@ -84,7 +84,7 @@ public class PromotionEngineTest {
 		product = new Product("C");
 		cart.addProduct(product);
 		
-		Assert.assertEquals(100, promotionEngine.promote(cart));
+		Assert.assertEquals(100.00, promotionEngine.promote(cart));
 	}
 	
 	@Test
@@ -152,7 +152,7 @@ public class PromotionEngineTest {
 		product = new Product("C");
 		cart.addProduct(product);
 		
-		Assert.assertEquals(370, promotionEngine.promote(cart));
+		Assert.assertEquals(370.00, promotionEngine.promote(cart));
 	}
 	
 	

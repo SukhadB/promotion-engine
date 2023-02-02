@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 public class PromotionEngine {
 
-	public int promote(Cart cart) {
-		int promotedCost = 0;
+	public double promote(Cart cart) {
+		double promotedCost = 0;
 		List<Product> productList = cart.getProductList();
 		
 		if (productList != null && !productList.isEmpty()) {
@@ -18,12 +18,14 @@ public class PromotionEngine {
 			
 			int countOfProductD = productList.stream().filter(p -> p.getId().equals("D")).collect(Collectors.toList()).size();
 			
-			int totalCostofProductAPostPromotion = (countOfProductA/3 * 130) + (countOfProductA%3 * 50); 
-			int totalCostofProductBPostPromotion = (countOfProductB/2 * 45) + (countOfProductB%2 * 30); 
-			int totalCostofProductCPostPromotion = (countOfProductC * 20); 
-			int totalCostofProductDPostPromotion = (countOfProductD * 15);
+			double totalCostofProductAPostPromotion = (countOfProductA/3 * 130) + (countOfProductA%3 * 50); 
+			double totalCostofProductBPostPromotion = (countOfProductB/2 * 45) + (countOfProductB%2 * 30); 
+			
+			double totalCostofProductCPostPromotion = (countOfProductC * 20); 
+			double totalCostofProductDPostPromotion = (countOfProductD * 15);		
 			promotedCost = totalCostofProductAPostPromotion + totalCostofProductBPostPromotion + totalCostofProductCPostPromotion+ totalCostofProductDPostPromotion;
 		}
 		return promotedCost;
 	}
+
 }
