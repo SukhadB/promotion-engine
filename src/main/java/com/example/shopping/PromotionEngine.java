@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class PromotionEngine {
 
-	public double promote(Cart cart) {
+	public double applyPromotion(Cart cart) {
 		double promotedCost = 0;
 		List<Product> productList = cart.getProductList();
 		
