@@ -10,8 +10,10 @@ public class PromotionEngineTest {
 		System.out.println("Promotion Engine");
 	}
 	
+	
 	@Test
 	public void promote() {
+		// First Test case to start the Promotion Engine
 		PromotionEngine promotionEngine = new PromotionEngine();
 		
 		Cart cart = new Cart();
@@ -22,6 +24,7 @@ public class PromotionEngineTest {
 
 	@Test
 	public void addProductToCart() {
+		// Test case to add Product to the cart
 		PromotionEngine promotionEngine = new PromotionEngine();
 		
 		Cart cart = new Cart();
@@ -35,6 +38,7 @@ public class PromotionEngineTest {
 	
 	@Test
 	public void calculateTotalCartValue() {
+		// Test case to add calculate Total Cart Value
 		PromotionEngine promotionEngine = new PromotionEngine();
 		
 		Cart cart = new Cart();
@@ -48,6 +52,7 @@ public class PromotionEngineTest {
 	
 	@Test
 	public void calculateTotalCartValueforAllProduct() {
+		// Test case to add Total cart value with all product
 		PromotionEngine promotionEngine = new PromotionEngine();
 		
 		Cart cart = new Cart();
@@ -67,6 +72,7 @@ public class PromotionEngineTest {
 	
 	@Test
 	public void ScenarioA() {
+		// Test case for scenario 1
 		PromotionEngine promotionEngine = new PromotionEngine();
 		
 		Cart cart = new Cart();
@@ -80,6 +86,4 @@ public class PromotionEngineTest {
 		
 		Assert.assertEquals(100, cart.calculateTotalCartValue());
 	}
-		
-	
 }
