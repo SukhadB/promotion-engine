@@ -4,31 +4,31 @@ import java.util.Map;
 
 public class Promotion {
 
-	private String promotionCode;
-	private Map<String, Integer> productDetails;
+	private String promoCode;
+	private Map<String, Integer> promoDetails;
 	private int promotionalCost;
 
-	public Promotion(String promotionCode, Map<String, Integer> productDetails, int promotionalCost) {
+	public Promotion(String promotionCode, Map<String, Integer> promoDetails, int promotionalCost) {
 		super();
-		this.promotionCode = promotionCode;
-		this.productDetails = productDetails;
+		this.promoCode = promotionCode;
+		this.promoDetails = promoDetails;
 		this.promotionalCost = promotionalCost;
 	}
 
-	public String getPromotionCode() {
-		return promotionCode;
+	public String getPromoCode() {
+		return promoCode;
 	}
 
-	public void setPromotionCode(String promotionCode) {
-		this.promotionCode = promotionCode;
+	public void setPromoCode(String promoCode) {
+		this.promoCode = promoCode;
 	}
 
-	public Map<String, Integer> getProductDetails() {
-		return productDetails;
+	public Map<String, Integer> getPromoDetails() {
+		return promoDetails;
 	}
 
-	public void setProductDetails(Map<String, Integer> productDetails) {
-		this.productDetails = productDetails;
+	public void setPromoDetails(Map<String, Integer> promoDetails) {
+		this.promoDetails = promoDetails;
 	}
 
 	public int getPromotionalCost() {
@@ -41,7 +41,7 @@ public class Promotion {
 
 	@Override
 	public String toString() {
-		return "Promotion [promotionCode=" + promotionCode + ", productDetails=" + productDetails + ", promotionalCost="
+		return "Promotion [promoCode=" + promoCode + ", promoDetails=" + promoDetails + ", promotionalCost="
 				+ promotionalCost + "]";
 	}
 	

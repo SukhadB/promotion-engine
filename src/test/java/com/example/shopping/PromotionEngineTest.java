@@ -151,8 +151,6 @@ public class PromotionEngineTest {
 		product = new Product("C");
 		cart.addProduct(product);
 		
-		System.out.println(cart);
-		
 		Assert.assertEquals(370.00, promotionEngine.applyPromotion(cart));
 	}
 	
