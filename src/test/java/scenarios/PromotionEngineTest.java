@@ -158,7 +158,7 @@ public class PromotionEngineTest {
 	
 	@Test
 	public void ScenariaC() {
-		// Test case for getting total cart value for scenario B
+		// Test case for getting total cart value for scenario C
 		PromotionEngine promotionEngine = new PromotionEngine();
 		
 		Cart cart = new Cart();
@@ -188,5 +188,36 @@ public class PromotionEngineTest {
 		cart.addProduct(product);
 
 		Assert.assertEquals(280.00, promotionEngine.promote(cart));
+	}
+	
+	@Test
+	public void checkPromotedValueForProductDonly() {
+		// Test case for getting total cart value when C is not added and product D is added
+		PromotionEngine promotionEngine = new PromotionEngine();
+		
+		Cart cart = new Cart();
+		
+		Product product = new Product("A");
+		cart.addProduct(product);
+		product = new Product("A");
+		cart.addProduct(product);
+		product = new Product("A");
+		cart.addProduct(product);
+		
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		product = new Product("B");
+		cart.addProduct(product);
+		
+		product = new Product("D");
+		cart.addProduct(product);
+
+		Assert.assertEquals(265.00, promotionEngine.promote(cart));
 	}
 }

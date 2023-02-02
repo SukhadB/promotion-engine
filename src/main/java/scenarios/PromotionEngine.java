@@ -26,7 +26,7 @@ public class PromotionEngine {
 			if (countOfProductD == 0) {
 				totalCostofProductCPostPromotion = (countOfProductC * 20);
 			}
-			if (countOfProductD == 0) {
+			if (countOfProductC == 0) {
 				totalCostofProductDPostPromotion = (countOfProductD * 15);		
 			}
 			if (totalCostofProductCPostPromotion == 0 && totalCostofProductDPostPromotion == 0) {
