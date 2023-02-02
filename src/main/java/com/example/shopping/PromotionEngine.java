@@ -4,6 +4,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PromotionEngine {
+	
+	private List<Promotion> promotionList; 
+
+	public List<Promotion> getPromotionList() {
+		return promotionList;
+	}
+
+	public void setPromotionList(List<Promotion> promotionList) {
+		this.promotionList = promotionList;
+	}
 
 	public double applyPromotion(Cart cart) {
 		double promotedCost = 0;

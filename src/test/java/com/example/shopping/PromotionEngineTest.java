@@ -1,10 +1,11 @@
 package com.example.shopping;
 
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import com.example.shopping.Cart;
-import com.example.shopping.Product;
-import com.example.shopping.PromotionEngine;
+import org.junit.Test;
 
 import junit.framework.Assert;
 
@@ -304,27 +305,33 @@ public class PromotionEngineTest {
 		Assert.assertEquals(75.00, promotionEngine.applyPromotion(cart));
 	}
 	
+	@Test
 	public void addingPromotion() {
-		// Test case for getting total cart value when C is not added and product D is added
+		
+		Map<String, Integer> promoDetails1 = new HashMap<>();
+		promoDetails1.put("A", 3);
+		
+		Promotion promotion1 = new Promotion("P1", promoDetails1, 130);
+		
+		Map<String, Integer> promoDetails2 = new HashMap<>();
+		promoDetails2.put("B", 2);
+		
+		Promotion promotion2 = new Promotion("P2", promoDetails2, 45);
+		
+		Map<String, Integer> promoDetails3 = new HashMap<>();
+		promoDetails3.put("C", 1);
+		promoDetails3.put("D", 1);
+		
+		Promotion promotion3 = new Promotion("P3", promoDetails3, 30);
+		
+		List<Promotion> promotionList = new ArrayList<>();
+		promotionList.add(promotion1);
+		promotionList.add(promotion2);
+		promotionList.add(promotion3);
+		
+		System.out.println(promotionList);
 		PromotionEngine promotionEngine = new PromotionEngine();
-		
-		Cart cart = new Cart();
-		
-		Product product = new Product("D");
-		cart.addProduct(product);
-		product = new Product("D");
-		cart.addProduct(product);
-		product = new Product("D");
-		cart.addProduct(product);
-
-		
-		product = new Product("C");
-		cart.addProduct(product);
-		product = new Product("C");
-		cart.addProduct(product);
-
-
-		Assert.assertEquals(75.00, promotionEngine.applyPromotion(cart));
+		promotionEngine.setPromotionList(promotionList);
 	}
 }
 
