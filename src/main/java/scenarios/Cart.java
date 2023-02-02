@@ -8,7 +8,10 @@ public class Cart {
 	private List<Product> productList;
 	
 	public int calculateTotalCartValue() {
-		int totalCost = 50;
+		int totalCost = 0;
+		for (Product product : productList) {
+			totalCost += product.getPrice();
+		}
 		return totalCost;
 	}
 
