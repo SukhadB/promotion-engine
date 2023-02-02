@@ -6,6 +6,7 @@ import java.util.List;
 public class Cart {
 	
 	private List<Product> productList;
+	private double totalAmount;
 	
 	public List<Product> getProductList() {
 		return productList;
@@ -15,11 +16,12 @@ public class Cart {
 		this.productList = productList;
 	}
 
-	public int calculateTotalCartValue() {
-		int totalCost = 0;
+	public double calculateTotalCartValue() {
+		double totalCost = 0;
 		for (Product product : productList) {
 			totalCost += product.getPrice();
 		}
+		this.totalAmount = totalCost;
 		return totalCost;
 	}
 
@@ -27,6 +29,7 @@ public class Cart {
 		if(this.productList == null) {
 			this.productList = new ArrayList<Product>();
 		}
+		this.totalAmount += product.getPrice();
 		this.productList.add(product);		
 	}
 

@@ -3,7 +3,7 @@ package scenarios;
 public class Product {
 	
 	private String id;
-	private int price;
+	private double price;
 	
 	public Product(String id) {
 		super();
@@ -27,10 +27,10 @@ public class Product {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	
