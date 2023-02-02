@@ -84,7 +84,7 @@ public class PromotionEngineTest {
 		product = new Product("C");
 		cart.addProduct(product);
 		
-		Assert.assertEquals(100, cart.calculateTotalCartValue());
+		Assert.assertEquals(100, promotionEngine.promote(cart));
 	}
 	
 	@Test
@@ -152,5 +152,7 @@ public class PromotionEngineTest {
 		
 		Assert.assertEquals(370, promotionEngine.promote(cart));
 	}
+	
+	
 	
 }
