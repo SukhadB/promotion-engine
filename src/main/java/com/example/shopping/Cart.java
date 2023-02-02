@@ -41,4 +41,11 @@ public class Cart {
 		this.productList.add(product);		
 	}
 
+	@Override
+	public String toString() {
+		return "Cart [productList=" + productList + ", totalAmount=" + totalAmount + "]";
+	}
+	
+	
+
 }
