@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.PromotionConfiguration;
 
-public abstract class AbstractPromotion implements IPromotion{
+public abstract class AbstractPromoProcessor implements IPromoProcessor{
 	
 	PromotionConfiguration promoConfig = new PromotionConfiguration();
 	

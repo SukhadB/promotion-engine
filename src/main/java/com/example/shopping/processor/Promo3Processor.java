@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
 
-public class Promo3Processor extends AbstractPromotion  {
+public class Promo3Processor extends AbstractPromoProcessor  {
 	
 	public Promo3Processor() {
 

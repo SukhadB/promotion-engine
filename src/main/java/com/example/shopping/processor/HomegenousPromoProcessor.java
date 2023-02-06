@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
 
-public class HomegenousPromoProcessor extends AbstractPromotion {
+public class HomegenousPromoProcessor extends AbstractPromoProcessor {
 	
 	@Override
 	public BigDecimal applyPromotion(List<Product> products) {

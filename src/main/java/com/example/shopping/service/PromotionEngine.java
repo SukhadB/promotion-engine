@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
 import com.example.shopping.model.PromotionConfiguration;
-import com.example.shopping.processor.IPromotion;
+import com.example.shopping.processor.IPromoProcessor;
 
 public class PromotionEngine {
 	
@@ -66,9 +66,11 @@ public class PromotionEngine {
 		return promotedCost;
 	}
 	
-	public BigDecimal applyPromotion(Cart cart, List<IPromotion> promotionList) {
+	public BigDecimal applyPromotion(Cart cart, List<IPromoProcessor> promotionList) {
 		BigDecimal promotedCost = BigDecimal.ZERO;
-		promotionList.forEach(p -> p.applyPromotion(cart.getProductList()));; 
+		for (IPromoProcessor iPromoProcessor : promotionList) {
+			promotedCost.add(iPromoProcessor.applyPromotion(cart.getProductList()));
+		} 
 		return promotedCost;
 	}
 
