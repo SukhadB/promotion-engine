@@ -1,4 +1,4 @@
-package com.example.shopping;
+package com.example.shopping.service;
 
 import static org.junit.Assert.assertEquals;
 
@@ -11,8 +11,6 @@ import org.junit.Test;
 
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
-import com.example.shopping.service.Cart;
-import com.example.shopping.service.PromotionEngine;
 
 import junit.framework.Assert;
 
