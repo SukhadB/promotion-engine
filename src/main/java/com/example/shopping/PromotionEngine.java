@@ -1,6 +1,7 @@
 package com.example.shopping;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class PromotionEngine {
@@ -14,6 +15,14 @@ public class PromotionEngine {
 	public void setPromotionList(List<Promotion> promotionList) {
 		this.promotionList = promotionList;
 	}
+	
+	public List<Promotion> findPromo(Product product, int count) {
+		List<Promotion> applicablePromotions = null;
+//		for (Promotion promotion : promotionList) {
+//			Map<String, Integer> promoDetails = promotion.getPromoDetails();		
+//		}
+		return null;
+	}
 
 	public double applyPromotion(Cart cart) {
 		double promotedCost = 0;
@@ -25,7 +34,6 @@ public class PromotionEngine {
 			int countOfProductB = productList.stream().filter(p -> p.getId().equals("B")).collect(Collectors.toList()).size();
 			
 			int countOfProductC = productList.stream().filter(p -> p.getId().equals("C")).collect(Collectors.toList()).size();
-			
 			int countOfProductD = productList.stream().filter(p -> p.getId().equals("D")).collect(Collectors.toList()).size();
 			
 			double totalCostofProductAPostPromotion = (countOfProductA/3 * 130) + (countOfProductA%3 * 50); 

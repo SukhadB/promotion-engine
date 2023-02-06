@@ -333,5 +333,11 @@ public class PromotionEngineTest {
 		PromotionEngine promotionEngine = new PromotionEngine();
 		promotionEngine.setPromotionList(promotionList);
 	}
+	
+	@Test
+	public void findPromo() {
+		
+		PromotionEngine promotionEngine = new PromotionEngine();
+		Assert.assertEquals(null, promotionEngine.findPromo(new Product("A"), 3));
+	}
 }
-
