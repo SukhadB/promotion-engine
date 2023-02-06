@@ -1,7 +1,6 @@
-package com.example.shopping;
+package com.example.shopping.service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
