@@ -1,4 +1,4 @@
-package com.example.shopping;
+package com.example.shopping.model;
 
 import java.util.Map;
 

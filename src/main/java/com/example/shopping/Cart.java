@@ -3,6 +3,8 @@ package com.example.shopping;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.shopping.model.Product;
+
 public class Cart {
 	
 	private List<Product> productList;

@@ -1,11 +1,16 @@
 package com.example.shopping;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
+
+import com.example.shopping.model.Product;
+import com.example.shopping.model.Promotion;
 
 import junit.framework.Assert;
 
@@ -338,6 +343,6 @@ public class PromotionEngineTest {
 	public void findPromo() {
 		
 		PromotionEngine promotionEngine = new PromotionEngine();
-		Assert.assertEquals(null, promotionEngine.findPromo(new Product("A"), 3));
+		assertEquals(null, promotionEngine.findPromo(new Product("A"), 3));
 	}
 }

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.example.shopping.model.Product;
+import com.example.shopping.model.Promotion;
+
 public class PromotionEngine {
 	
 	private List<Promotion> promotionList; 
@@ -18,9 +21,6 @@ public class PromotionEngine {
 	
 	public List<Promotion> findPromo(Product product, int count) {
 		List<Promotion> applicablePromotions = null;
-//		for (Promotion promotion : promotionList) {
-//			Map<String, Integer> promoDetails = promotion.getPromoDetails();		
-//		}
 		return null;
 	}
 
