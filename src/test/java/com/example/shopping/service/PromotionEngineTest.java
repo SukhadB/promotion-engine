@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.Test;
 
 import com.example.shopping.model.Product;
-import com.example.shopping.model.Promotion;
+import com.example.shopping.model.PromotionConfiguration;
 
 import junit.framework.Assert;
 
@@ -316,20 +316,20 @@ public class PromotionEngineTest {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("A", 3);
 		
-		Promotion promotion1 = new Promotion("P1", promoDetails1, 130);
+		PromotionConfiguration promotion1 = new PromotionConfiguration("P1", promoDetails1, 130);
 		
 		Map<String, Integer> promoDetails2 = new HashMap<>();
 		promoDetails2.put("B", 2);
 		
-		Promotion promotion2 = new Promotion("P2", promoDetails2, 45);
+		PromotionConfiguration promotion2 = new PromotionConfiguration("P2", promoDetails2, 45);
 		
 		Map<String, Integer> promoDetails3 = new HashMap<>();
 		promoDetails3.put("C", 1);
 		promoDetails3.put("D", 1);
 		
-		Promotion promotion3 = new Promotion("P3", promoDetails3, 30);
+		PromotionConfiguration promotion3 = new PromotionConfiguration("P3", promoDetails3, 30);
 		
-		List<Promotion> promotionList = new ArrayList<>();
+		List<PromotionConfiguration> promotionList = new ArrayList<>();
 		promotionList.add(promotion1);
 		promotionList.add(promotion2);
 		promotionList.add(promotion3);

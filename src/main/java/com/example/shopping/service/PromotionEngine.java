@@ -1,25 +1,27 @@
 package com.example.shopping.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
-import com.example.shopping.model.Promotion;
+import com.example.shopping.model.PromotionConfiguration;
+import com.example.shopping.processor.IPromotion;
 
 public class PromotionEngine {
 	
-	private List<Promotion> promotionList; 
+	private List<PromotionConfiguration> promotionList; 
 
-	public List<Promotion> getPromotionList() {
+	public List<PromotionConfiguration> getPromotionList() {
 		return promotionList;
 	}
 
-	public void setPromotionList(List<Promotion> promotionList) {
+	public void setPromotionList(List<PromotionConfiguration> promotionList) {
 		this.promotionList = promotionList;
 	}
 	
-	public List<Promotion> findPromo(Product product, int count) {
-		List<Promotion> applicablePromotions = null;
+	public List<PromotionConfiguration> findPromo(Product product, int count) {
+		List<PromotionConfiguration> applicablePromotions = null;
 		return null;
 	}
 
@@ -61,6 +63,12 @@ public class PromotionEngine {
 			
 			promotedCost = totalCostofProductAPostPromotion + totalCostofProductBPostPromotion + totalCostofProductCPostPromotion+ totalCostofProductDPostPromotion;
 		}
+		return promotedCost;
+	}
+	
+	public BigDecimal applyPromotion(Cart cart, List<IPromotion> promotionList) {
+		BigDecimal promotedCost = BigDecimal.ZERO;
+		promotionList.forEach(p -> p.applyPromotion(cart.getProductList()));; 
 		return promotedCost;
 	}
 

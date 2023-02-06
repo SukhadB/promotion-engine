@@ -2,13 +2,17 @@ package com.example.shopping.model;
 
 import java.util.Map;
 
-public class Promotion {
+public class PromotionConfiguration {
 
 	private String promoCode;
 	private Map<String, Integer> promoDetails;
 	private int promotionalCost;
+	
+	public PromotionConfiguration() {
+		
+	}
 
-	public Promotion(String promotionCode, Map<String, Integer> promoDetails, int promotionalCost) {
+	public PromotionConfiguration(String promotionCode, Map<String, Integer> promoDetails, int promotionalCost) {
 		super();
 		this.promoCode = promotionCode;
 		this.promoDetails = promoDetails;
