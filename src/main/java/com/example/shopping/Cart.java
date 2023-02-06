@@ -40,6 +40,12 @@ public class Cart {
 		this.totalAmount += product.getPrice();
 		this.productList.add(product);		
 	}
+	
+	public double checkout() {
+		double totalCartCost = 0;
+		
+		return totalCartCost;
+	}
 
 	@Override
 	public String toString() {
