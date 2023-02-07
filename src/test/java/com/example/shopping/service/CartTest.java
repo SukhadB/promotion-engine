@@ -7,10 +7,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import com.example.shopping.exception.ProductNotPresentInInvetory;
 import com.example.shopping.model.Inventory;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
@@ -99,4 +101,31 @@ public class CartTest {
 
 		assertEquals(cart.calculateTotalCartValue(), 420.0d, 0.001);
 	}
+	
+	@Test
+    public void testEmptyCart() {
+		List<String> order = Arrays.asList("A", "A", "A", "A", "A", "B", "B", "B", "B", "B", "C");
+		
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
+        cart.empty();
+
+        assertEquals(cart.calculateTotalCartValue(), 0, 0.0);
+        assertEquals(cart.checkout(), 0, 0.0);
+    }
+	
+	@Test(expected = IllegalArgumentException.class)
+    public void testCatchEmptyAddException() throws ProductNotPresentInInvetory {
+		Cart cart = new Cart(promotionEngine, inventory);
+        cart.add("");
+        cart.empty();
+    }
+	
+	@Test(expected = IllegalArgumentException.class)
+    public void testCatchEmptyListOnAddException() throws ProductNotPresentInInvetory {
+        List<String> order = new CopyOnWriteArrayList<String>(Arrays.asList("Z"));
+        Cart cart = new Cart(promotionEngine, inventory);
+        cart.add(order);
+        cart.empty();
+    }
 }
