@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import com.example.shopping.model.Product;
-import com.example.shopping.model.PromotionConfiguration;
+import com.example.shopping.model.Promotion;
 
 public abstract class AbstractPromoProcessor implements IPromoProcessor{
 	
-	PromotionConfiguration promoConfig = new PromotionConfiguration();
+	Promotion promoConfig = new Promotion();
 	
-	public abstract BigDecimal applyPromotion(List<Product> products);
+	public abstract double applyPromotion(List<Product> products);
 
 
 }

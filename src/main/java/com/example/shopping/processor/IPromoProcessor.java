@@ -8,6 +8,6 @@ import com.example.shopping.model.Product;
 
 public interface IPromoProcessor {
 	
-	public BigDecimal applyPromotion(List<Product> products);
+	public double applyPromotion(List<Product> products);
 
 }

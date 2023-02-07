@@ -7,26 +7,24 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
+import com.example.shopping.model.Promotion;
 
-public class Promo1Processor extends AbstractPromoProcessor {
+public class SimpleProcessor implements IPromoProcessor {
 	
-	public Promo1Processor() {
+	Promotion promoConfig = new Promotion();
+	
+	public SimpleProcessor(Promotion promoConfig) {
 
-		Map<String, Integer> promoDetails = new HashMap<>();
-		promoDetails.put("A", 3);
-		
-		promoConfig.setPromoCode("P1");
-		promoConfig.setPromoDetails(promoDetails);
-		promoConfig.setPromotionalCost(130);
+		this.promoConfig = promoConfig;
 	}
 	
 	@Override
-	public BigDecimal applyPromotion(List<Product> products) {
+	public double applyPromotion(List<Product> products) {
 		
 		Map<String, Integer> promoDetails = promoConfig.getPromoDetails();
 		int promotionalCost = promoConfig.getPromotionalCost();
 		
-		BigDecimal totalApplicablePromotionCost = BigDecimal.ZERO;
+		double totalApplicablePromotionCost = 0;
 		
 		for (Map.Entry<String, Integer> entry : promoDetails.entrySet()) {
 			String key = entry.getKey();
@@ -36,10 +34,9 @@ public class Promo1Processor extends AbstractPromoProcessor {
 			
 			double productPrice = product.get(0).getPrice();
 			
-			totalApplicablePromotionCost.add(new BigDecimal(product.size()/val * promotionalCost + product.size()%val * productPrice));
+			totalApplicablePromotionCost = product.size()/val * promotionalCost + product.size()%val * productPrice;
 			
 		}
-		
 		
 		return totalApplicablePromotionCost;
 		

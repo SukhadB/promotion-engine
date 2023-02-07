@@ -21,12 +21,12 @@ public class Promo2Processor extends AbstractPromoProcessor  {
 	} 
 	
 	@Override
-	public BigDecimal applyPromotion(List<Product> products) {
+	public double applyPromotion(List<Product> products) {
 		
 		Map<String, Integer> promoDetails = promoConfig.getPromoDetails();
 		int promotionalCost = promoConfig.getPromotionalCost();
 		
-		BigDecimal totalApplicablePromotionCost = BigDecimal.ZERO;
+		double totalApplicablePromotionCost = 0;
 		
 		for (Map.Entry<String, Integer> entry : promoDetails.entrySet()) {
 			String key = entry.getKey();
@@ -36,7 +36,7 @@ public class Promo2Processor extends AbstractPromoProcessor  {
 			
 			double productPrice = product.get(0).getPrice();
 			
-			totalApplicablePromotionCost.add(new BigDecimal(product.size()/val * promotionalCost + product.size()%val * productPrice));
+			totalApplicablePromotionCost += product.size()/val * promotionalCost + product.size()%val * productPrice;
 			
 		}
 		

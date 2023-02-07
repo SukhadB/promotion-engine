@@ -7,22 +7,19 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
+import com.example.shopping.model.Promotion;
 
-public class Promo3Processor extends AbstractPromoProcessor  {
+public class ComplexProcessor implements IPromoProcessor  {
 	
-	public Promo3Processor() {
+	Promotion promoConfig = new Promotion();
+	
+	public ComplexProcessor(Promotion promoConfig) {
 
-		Map<String, Integer> promoDetails = new HashMap<>();
-		promoDetails.put("C", 1);
-		promoDetails.put("D", 1);
-		
-		promoConfig.setPromoCode("P3");
-		promoConfig.setPromoDetails(promoDetails);
-		promoConfig.setPromotionalCost(30);
+		this.promoConfig = promoConfig;
 	}
 
 	@Override
-	public BigDecimal applyPromotion(List<Product> products) {
+	public double applyPromotion(List<Product> products) {
 		
 		int countOfProductC = products.stream().filter(p -> p.getSKUId().equals("C")).collect(Collectors.toList()).size();
 		int countOfProductD = products.stream().filter(p -> p.getSKUId().equals("D")).collect(Collectors.toList()).size();
@@ -49,7 +46,7 @@ public class Promo3Processor extends AbstractPromoProcessor  {
 			}
 		}
 		
-		return new BigDecimal(totalCostofProductCPostPromotion + totalCostofProductDPostPromotion);
+		return totalCostofProductCPostPromotion + totalCostofProductDPostPromotion;
 	}
 	
 	
