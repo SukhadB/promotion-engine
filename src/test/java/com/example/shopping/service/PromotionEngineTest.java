@@ -1,6 +1,9 @@
 package com.example.shopping.service;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,342 +15,136 @@ import com.example.shopping.model.Inventory;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
 
-import junit.framework.Assert;
-
 public class PromotionEngineTest {
 	
 	private Inventory inventory;
+	private PromotionEngine promotionEngine;
     private List<Product> products = new ArrayList<>();
-    
-    @Before
+	
+	@Before
     public void setUp() {
     	products.add(new Product("A", 50));
     	products.add(new Product("B", 30));
     	products.add(new Product("C", 20));
     	products.add(new Product("D", 15));
-
+    	
+    	List<Promotion> promotionList = new ArrayList<>();
+    	Map<String, Integer> promoDetails1 = new HashMap<>();
+		promoDetails1.put("A", 3);
+		Promotion promotion1 = new Promotion("P1", promoDetails1, 130);
+		promotionList.add(promotion1);
+		
+		Map<String, Integer> promoDetails2 = new HashMap<>();
+		promoDetails2.put("B", 2);
+		Promotion promotion2 = new Promotion("P2", promoDetails2, 45);
+		promotionList.add(promotion2);
+		
+		Map<String, Integer> promoDetails3 = new HashMap<>();
+		promoDetails3.put("C", 1);
+		promoDetails3.put("D", 1);
+		Promotion promotion3 = new Promotion("P3", promoDetails3, 30);
+		promotionList.add(promotion3);
+		
+		promotionEngine = new PromotionEngine(promotionList);
         inventory = new Inventory(products);
     }
 	
 	@Test
 	public void promote() {
 		// First Test case to start the Promotion Engine
-		PromotionEngine promotionEngine = new PromotionEngine();
-		
 		Cart cart = new Cart();
-				
-		Assert.assertEquals(0.00, promotionEngine.applyPromotion(cart));
+		assertEquals(promotionEngine.applyPromotion(cart), 0.0d, 0.001);
 		
 	}
 
 	@Test
 	public void addProductToCart() {
 		// Test case to add Product to the cart
-		PromotionEngine promotionEngine = new PromotionEngine();
+		List<String> order = Arrays.asList("A");
 		
-		Cart cart = new Cart();
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 		
-		Product product = new Product("A");
-		cart.add(product);
-		
-		Assert.assertEquals(50.00, promotionEngine.applyPromotion(cart));
-		
-	}
-	
-	@Test
-	public void calculateTotalCartValue() {
-		// Test case to add calculate Total Cart Value
-		PromotionEngine promotionEngine = new PromotionEngine();
-		
-		Cart cart = new Cart();
-		
-		Product product = new Product("A");
-		cart.add(product);
-		
-		Assert.assertEquals(50.00, cart.calculateTotalCartValue());
-		
-	}
-	
-	@Test
-	public void calculateTotalCartValueforAllProduct() {
-		// Test case to add Total cart value with all product
-		PromotionEngine promotionEngine = new PromotionEngine();
-		
-		Cart cart = new Cart();
-		
-		Product product = new Product("A");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("C");
-		cart.add(product);
-		product = new Product("D");
-		cart.add(product);
-		
-		Assert.assertEquals(115.00, cart.calculateTotalCartValue());
+		assertEquals(promotionEngine.applyPromotion(cart), 50.0d, 0.001);
 		
 	}
 	
 	@Test
 	public void scenarioA() {
 		// Test case for scenario A
-		PromotionEngine promotionEngine = new PromotionEngine();
+		List<String> order = Arrays.asList("A", "B", "C");
 		
-		Cart cart = new Cart();
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 		
-		Product product = new Product("A");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("C");
-		cart.add(product);
-		
-		Assert.assertEquals(100.00, promotionEngine.applyPromotion(cart));
-	}
-	
-	@Test
-	public void totalCartValueForScenariaB() {
-		// Test case for getting total cart value for scenario B
-		PromotionEngine promotionEngine = new PromotionEngine();
-		
-		Cart cart = new Cart();
-		
-		Product product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("C");
-		cart.add(product);
-		
-		Assert.assertEquals(420.00, cart.calculateTotalCartValue());
+		assertEquals(promotionEngine.applyPromotion(cart), 100.0d, 0.001);
 	}
 	
 	@Test
 	public void scenariaB() {
 		// Test case for getting total cart value for scenario B
-		PromotionEngine promotionEngine = new PromotionEngine();
+		List<String> order = Arrays.asList("A", "A", "A", "A", "A", "B", "B", "B", "B", "B", "C");
 		
-		Cart cart = new Cart();
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 		
-		Product product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		
-		product = new Product("C");
-		cart.add(product);
-		
-		Assert.assertEquals(370.00, promotionEngine.applyPromotion(cart));
+		assertEquals(promotionEngine.applyPromotion(cart), 370.0d, 0.001);
 	}
 	
 	
 	@Test
 	public void scenariaC() {
 		// Test case for getting total cart value for scenario C
-		PromotionEngine promotionEngine = new PromotionEngine();
+		List<String> order = Arrays.asList("A", "A", "A", "B", "B", "B", "B", "B", "C", "D");
 		
-		Cart cart = new Cart();
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 		
-		Product product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		
-		product = new Product("C");
-		cart.add(product);
-		
-		product = new Product("D");
-		cart.add(product);
-
-		Assert.assertEquals(280.00, promotionEngine.applyPromotion(cart));
+		assertEquals(promotionEngine.applyPromotion(cart), 280.0d, 0.001);
 	}
 	
 	@Test
 	public void checkPromotedValueForProductDonly() {
 		// Test case for getting total cart value when C is not added and product D is added
-		PromotionEngine promotionEngine = new PromotionEngine();
+		List<String> order = Arrays.asList("A", "A", "A", "B", "B", "B", "B", "B", "D");
 		
-		Cart cart = new Cart();
-		
-		Product product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		
-		product = new Product("D");
-		cart.add(product);
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 
-		Assert.assertEquals(265.00, promotionEngine.applyPromotion(cart));
+		assertEquals(promotionEngine.applyPromotion(cart), 265.0d, 0.001);
 	}
 	
 	@Test
 	public void scenarioD() {
 		// Test case for getting total cart value when C is not added and product D is added
-		PromotionEngine promotionEngine = new PromotionEngine();
+		List<String> order = Arrays.asList("A", "A", "A", "B", "B", "B", "B", "B", "C", "C", "D");
 		
-		Cart cart = new Cart();
-		
-		Product product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		
-		product = new Product("C");
-		cart.add(product);
-		product = new Product("C");
-		cart.add(product);
-		
-		product = new Product("D");
-		cart.add(product);
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 
-		Assert.assertEquals(300.00, promotionEngine.applyPromotion(cart));
+		assertEquals(promotionEngine.applyPromotion(cart), 300.0d, 0.001);
 	}
 	
 	@Test
 	public void scenarioE() {
 		// Test case for getting total cart value when C is not added and product D is added
-		PromotionEngine promotionEngine = new PromotionEngine();
+		List<String> order = Arrays.asList("C", "C", "C", "D", "D");
 		
-		Cart cart = new Cart();
-		
-		Product product = new Product("C");
-		cart.add(product);
-		product = new Product("C");
-		cart.add(product);
-		product = new Product("C");
-		cart.add(product);
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 
-		
-		product = new Product("D");
-		cart.add(product);
-		product = new Product("D");
-		cart.add(product);
-
-
-		Assert.assertEquals(80.00, promotionEngine.applyPromotion(cart));
+		assertEquals(promotionEngine.applyPromotion(cart), 80.0d, 0.001);
 	}
 	
 	@Test
 	public void scenarioF() {
 		// Test case for getting total cart value when C is not added and product D is added
-		PromotionEngine promotionEngine = new PromotionEngine();
+		List<String> order = Arrays.asList("D", "D", "D", "C", "C");
 		
-		Cart cart = new Cart();
-		
-		Product product = new Product("D");
-		cart.add(product);
-		product = new Product("D");
-		cart.add(product);
-		product = new Product("D");
-		cart.add(product);
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 
-		
-		product = new Product("C");
-		cart.add(product);
-		product = new Product("C");
-		cart.add(product);
 
-		System.out.println(promotionEngine.applyPromotion(cart));
-		Assert.assertEquals(75.0, promotionEngine.applyPromotion(cart));
-	}
-	
-	@Test
-	public void addingPromotion() {
-		
-		Map<String, Integer> promoDetails1 = new HashMap<>();
-		promoDetails1.put("A", 3);
-		
-		Promotion promotion1 = new Promotion("P1", promoDetails1, 130);
-		
-		Map<String, Integer> promoDetails2 = new HashMap<>();
-		promoDetails2.put("B", 2);
-		
-		Promotion promotion2 = new Promotion("P2", promoDetails2, 45);
-		
-		Map<String, Integer> promoDetails3 = new HashMap<>();
-		promoDetails3.put("C", 1);
-		promoDetails3.put("D", 1);
-		
-		Promotion promotion3 = new Promotion("P3", promoDetails3, 30);
-		
-		List<Promotion> promotionList = new ArrayList<>();
-		promotionList.add(promotion1);
-		promotionList.add(promotion2);
-		promotionList.add(promotion3);
-		
-		System.out.println(promotionList);
-		PromotionEngine promotionEngine = new PromotionEngine(promotionList);
+		assertEquals(promotionEngine.applyPromotion(cart), 75.0d, 0.001);
 	}
 }

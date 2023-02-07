@@ -50,7 +50,7 @@ public class Cart implements ICart{
 	
 	@Override
 	public void empty() {
-		// TODO Auto-generated method stub
+		this.productList.clear();
 		
 	}
 

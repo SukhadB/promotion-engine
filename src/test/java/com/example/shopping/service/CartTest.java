@@ -58,15 +58,45 @@ public class CartTest {
 	
 	@Test
 	public void Approach2checkout() {
-		List<String> productName = Arrays.asList("A", "A", "B", "B");
+		List<String> order = Arrays.asList("A", "A", "B", "B");
 		
 		Cart cart = new Cart(promotionEngine, inventory);
-		cart.add(productName);
+		cart.add(order);
 		
 		assertEquals(cart.checkout(), 145.0d, 0.001);
+	}
+	
+	@Test
+	public void calculateTotalCartValue() {
+		// Test case to add calculate Total Cart Value
+		List<String> order = Arrays.asList("A");
 		
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
 		
+		assertEquals(cart.calculateTotalCartValue(), 50.0d, 0.001);
 		
+	}
+	
+	@Test
+	public void calculateTotalCartValueforAllProduct() {
+		// Test case to add Total cart value with all product
+		List<String> order = Arrays.asList("A", "B", "C", "D");
 		
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
+		
+		assertEquals(cart.calculateTotalCartValue(), 115.0d, 0.001);
+	}
+	
+	@Test
+	public void totalCartValueForScenariaB() {
+		// Test case for getting total cart value for scenario B
+		List<String> order = Arrays.asList("A", "A", "A", "A", "A", "B", "B", "B", "B", "B", "C");
+		
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
+
+		assertEquals(cart.calculateTotalCartValue(), 420.0d, 0.001);
 	}
 }
