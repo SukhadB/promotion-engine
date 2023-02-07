@@ -343,7 +343,7 @@ public class PromotionEngineTest {
 	public void findPromo() {
 		
 		PromotionEngine promotionEngine = new PromotionEngine();
-		assertEquals(null, promotionEngine.findPromo(new Product("A"), 3));
+		assertEquals(null, promotionEngine.findPromo(new Cart()));
 	}
 	
 	@Test

@@ -7,6 +7,7 @@ public class PromotionConfiguration {
 	private String promoCode;
 	private Map<String, Integer> promoDetails;
 	private int promotionalCost;
+	private String promotionType;
 	
 	public PromotionConfiguration() {
 		
@@ -33,6 +34,15 @@ public class PromotionConfiguration {
 
 	public void setPromoDetails(Map<String, Integer> promoDetails) {
 		this.promoDetails = promoDetails;
+		if (promoDetails.entrySet().size() == 1) {
+			promotionType = "Simple";
+		} else {
+			promotionType = "Complex";
+		}
+	}
+
+	public String getPromotionType() {
+		return promotionType;
 	}
 
 	public int getPromotionalCost() {

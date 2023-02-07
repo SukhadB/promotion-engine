@@ -1,7 +1,11 @@
 package com.example.shopping.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
@@ -20,9 +24,77 @@ public class PromotionEngine {
 		this.promotionList = promotionList;
 	}
 	
-	public List<PromotionConfiguration> findPromo(Product product, int count) {
-		List<PromotionConfiguration> applicablePromotions = null;
-		return null;
+	public void findApplicablePromo(Cart cart) {
+		Map<String, Integer> productCount = cart.getProductCount();
+		List<Product> products = cart.getProducts();
+		
+		
+		for (Map.Entry<String, Integer> productName : productCount.entrySet()) {
+			String key = productName.getKey();
+			Integer val = productName.getValue();
+			
+			Optional<PromotionConfiguration> optional = promotionList.stream().filter(p -> p.getPromoDetails().containsKey(key) && p.getPromoDetails().get("A") >= val).findFirst();
+			if (optional != null) {
+				PromotionConfiguration pc = optional.get();
+			}
+		}
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		Map<String, Integer> promoDetails1 = new HashMap<>();
+		promoDetails1.put("A", 3);
+		
+		PromotionConfiguration promotion1 = new PromotionConfiguration("P1", promoDetails1, 130);
+		
+		Map<String, Integer> promoDetails2 = new HashMap<>();
+		promoDetails2.put("B", 2);
+		
+		PromotionConfiguration promotion2 = new PromotionConfiguration("P2", promoDetails2, 45);
+		
+		Map<String, Integer> promoDetails3 = new HashMap<>();
+		promoDetails3.put("C", 1);
+		promoDetails3.put("D", 1);
+		
+		PromotionConfiguration promotion3 = new PromotionConfiguration("P3", promoDetails3, 30);
+		
+		List<PromotionConfiguration> promotionList = new ArrayList<>();
+		promotionList.add(promotion1);
+		promotionList.add(promotion2);
+		promotionList.add(promotion3);
+		
+		System.out.println(promotionList.stream().anyMatch(p -> p.getPromoDetails().containsKey("A")));
+		System.out.println(promotionList.stream().filter(p -> p.getPromoDetails().containsKey("A") && p.getPromoDetails().get("A") >= 3).findFirst().get());
+	}
+	
+	public Map<PromotionConfiguration, List<Product>> findPromo(Cart cart) {
+		Map<PromotionConfiguration, List<Product>> applicablePromotions = null;
+		
+		Map<String, Integer> productCount = cart.getProductCount();
+		List<Product> products = cart.getProducts();
+		
+		for (PromotionConfiguration promotion : promotionList) {
+			Map<String, Integer> promoDetails = promotion.getPromoDetails();
+			
+			boolean isPromoApplicable = true;
+			List<Product> matchingSet = new ArrayList<>();
+			for (Map.Entry<String, Integer> entry : promoDetails.entrySet()) {
+				String key = entry.getKey();
+				Integer val = entry.getValue();
+				
+				if (productCount.get(key) < val) {
+					isPromoApplicable = false;
+				}
+				matchingSet.addAll(products.stream().filter(p -> p.getSKUId().equals(key)).collect(Collectors.toList()));
+			}
+			
+			if (isPromoApplicable) {
+				applicablePromotions.put(promotion, matchingSet);
+			}
+		}
+		
+		return applicablePromotions;
 	}
 
 	public double applyPromotion(Cart cart) {
@@ -68,6 +140,9 @@ public class PromotionEngine {
 	
 	public BigDecimal applyPromotion(Cart cart, List<IPromoProcessor> processor) {
 		BigDecimal promotedCost = BigDecimal.ZERO;
+		
+		Map<PromotionConfiguration, List<Product>> detailSet = findPromo(cart);
+		
 		for (IPromoProcessor iPromoProcessor : processor) {
 			promotedCost.add(iPromoProcessor.applyPromotion(cart.getProducts()));
 		} 
