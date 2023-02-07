@@ -52,7 +52,7 @@ public class PromotionEngineTest {
 	@Test
 	public void promote() {
 		// First Test case to start the Promotion Engine
-		Cart cart = new Cart();
+		Cart cart = new Cart(promotionEngine, inventory);
 		assertEquals(promotionEngine.applyPromotion(cart), 0.0d, 0.001);
 		
 	}

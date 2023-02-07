@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.shopping.model.Product;
 
-public class DefaultProcessor implements IPromoProcessor {
+public class DefaultPromoProcessor implements IPromoProcessor {
 
 
 	@Override

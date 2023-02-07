@@ -2,10 +2,10 @@ package com.example.shopping.model;
 
 import java.util.Map;
 
-import com.example.shopping.processor.ComplexProcessor;
-import com.example.shopping.processor.DefaultProcessor;
+import com.example.shopping.processor.ComplexPromoProcessor;
+import com.example.shopping.processor.DefaultPromoProcessor;
 import com.example.shopping.processor.IPromoProcessor;
-import com.example.shopping.processor.SimpleProcessor;
+import com.example.shopping.processor.SimplePromoProcessor;
 
 public class Promotion {
 
@@ -26,17 +26,17 @@ public class Promotion {
 		this.promotionalCost = promotionalCost;
 		if (promoDetails.entrySet().size() == 1) {
 			promotionType = "Simple";
-			processor = new SimpleProcessor(this);
+			processor = new SimplePromoProcessor(this);
 		} else {
 			promotionType = "Complex";
-			processor = new ComplexProcessor(this);
+			processor = new ComplexPromoProcessor(this);
 		}
 		
 	}
 
 	public Promotion(String promotionType) {
 		this.promotionType = promotionType;
-		processor = new DefaultProcessor();
+		processor = new DefaultPromoProcessor();
 	}
 
 	public String getPromoCode() {

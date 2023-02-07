@@ -1,6 +1,7 @@
 package com.example.shopping.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -66,20 +67,44 @@ public class PromotionEngine {
 	}
 	
 	public Promotion findPromo(String productName, int count) {
-		Promotion promoConfiguration = null;
+		Promotion promotion = null;
 		Optional<Promotion> optional = promotionList.stream().filter(p -> p.getPromoDetails().containsKey(productName) && count >= p.getPromoDetails().get(productName)).findFirst();
 		
 		if (optional != null) {
 			try {
-				promoConfiguration= optional.get();
+				promotion = optional.get();
 			} catch (NoSuchElementException e) {
-				promoConfiguration = new Promotion("Default");
+				promotion = new Promotion("Default");
 			}
 		} else {
-			promoConfiguration = new Promotion("Default");
+			promotion = new Promotion("Default");
 		}
 		
-		return promoConfiguration;
+		return promotion;
+	}
+
+	public Map<Promotion, List<Product>> findPromo(List<Product> productList, Map<String, Integer> productCount) {
+		return productList.stream().collect(Collectors.groupingBy(i -> {
+			String skuId = i.getSKUId();
+			
+			int count = productCount.get(skuId);
+			
+			Optional<Promotion> optional = promotionList.stream().filter(p -> p.getPromoDetails().containsKey(skuId) && count >= p.getPromoDetails().get(skuId)).findFirst();
+			
+			Promotion promotion = null;
+			
+			if (optional != null) {
+				try {
+					promotion= optional.get();
+					return promotion;
+				} catch (NoSuchElementException e) {
+					return new Promotion("Default");
+				}
+			} else {
+				return new Promotion("Default");
+			}
+
+		}, Collectors.toList()));
 	}
 	
 	

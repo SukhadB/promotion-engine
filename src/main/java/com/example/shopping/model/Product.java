@@ -7,21 +7,6 @@ public class Product {
 	private String skuId;
 	private double price;
 	
-	public Product(String id) {
-		this.skuId = id;
-		
-		if (id.equals("A")) {
-			this.price = 50;
-		} else if (id.equals("B")) {
-			this.price = 30;
-		} else if (id.equals("C")) {
-			this.price = 20;
-		} else if (id.equals("D")) {
-			this.price = 15;
-		}
-		
-	}
-	
 	public Product(String id, double price) {
 		this.skuId = id;
 		this.price = price;

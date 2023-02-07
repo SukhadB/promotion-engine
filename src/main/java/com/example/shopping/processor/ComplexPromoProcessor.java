@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
 
-public class ComplexProcessor implements IPromoProcessor  {
+public class ComplexPromoProcessor implements IPromoProcessor  {
 	
 	Promotion promoConfig = new Promotion();
 	
-	public ComplexProcessor(Promotion promoConfig) {
+	public ComplexPromoProcessor(Promotion promoConfig) {
 
 		this.promoConfig = promoConfig;
 	}

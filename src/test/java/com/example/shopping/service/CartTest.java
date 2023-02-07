@@ -53,7 +53,7 @@ public class CartTest {
 	
 	@Test
 	public void checkout() {
-		Cart cart = new Cart();
+		Cart cart = new Cart(promotionEngine, inventory);
 		assertEquals(cart.checkout(), 0.0d, 0.001);
 	}
 	
@@ -65,6 +65,26 @@ public class CartTest {
 		cart.add(order);
 		
 		assertEquals(cart.checkout(), 145.0d, 0.001);
+	}
+	
+	@Test
+	public void checkout3() {
+		List<String> order = Arrays.asList("A", "A", "A", "B", "B", "B", "B",  "C", "C", "D", "D");
+		
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
+		
+		assertEquals(cart.checkout(), 280.0d, 0.001);
+	}
+	
+	@Test
+	public void checkout4() {
+		List<String> order = Arrays.asList("A", "A", "B", "B", "B", "C", "D", "D");
+		
+		Cart cart = new Cart(promotionEngine, inventory);
+		cart.add(order);
+		System.out.println(cart.checkout());
+		assertEquals(cart.checkout(), 280.0d, 0.001);
 	}
 	
 	@Test
