@@ -13,7 +13,7 @@ public interface ICart {
 
     public void add(Product product);
 
-    public void add(List<Product> products);
+    public void add(List<String> productNames);
 
     public double calculateTotalCartValue();
 

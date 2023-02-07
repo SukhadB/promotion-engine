@@ -1,12 +1,13 @@
 package com.example.shopping.model;
 
+import com.example.shopping.exception.ProductNotPresentInInvetory;
+
 public class Product {
 	
 	private String skuId;
 	private double price;
 	
 	public Product(String id) {
-		super();
 		this.skuId = id;
 		
 		if (id.equals("A")) {
@@ -21,6 +22,20 @@ public class Product {
 		
 	}
 	
+	public Product(String id, double price) {
+		this.skuId = id;
+		this.price = price;
+	}
+	
+	public Product(Product product) throws ProductNotPresentInInvetory {
+		if (product == null) {
+			 throw new IllegalArgumentException("Item cannot be null.");
+		}
+		
+		this.skuId = product.skuId;
+        this.price = product.getPrice();
+	}
+
 	public String getSKUId() {
 		return skuId;
 	}

@@ -1,28 +1,39 @@
+/**
+ * This package consist of the services which will be exposed
+ */
 package com.example.shopping.service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.example.shopping.exception.ProductNotPresentInInvetory;
+import com.example.shopping.model.Inventory;
 import com.example.shopping.model.Product;
-import com.example.shopping.model.Promotion;
 
+/**
+ * The class consists of the Cart details
+ * @author Sukhad Bhole
+ *
+ */
 public class Cart implements ICart{
 	
-	private List<Product> productList;
+	private List<Product> productList = new ArrayList<>();
 	private double totalAmount;
 	private Map<String, Integer> productCount = new HashMap<>();
+	
 	private PromotionEngine promotionEngine;
+	private Inventory inventory;
 	
 	public Cart() {
 		
 	}
 	
-	public Cart(PromotionEngine promotionEngine) {
+	public Cart(PromotionEngine promotionEngine, Inventory inventory) {
 		this.promotionEngine = promotionEngine;
+		this.inventory = inventory;
 	}
 	
 	public double getTotalAmount() {
@@ -43,8 +54,13 @@ public class Cart implements ICart{
 		
 	}
 
-	public void add(List<Product> productList) {
-		this.productList = productList;
+//	public void add(List<Product> productList) {
+//		this.productList = productList;
+//	}
+	
+	public void add(String productName) throws ProductNotPresentInInvetory {
+		Product inventoryProduct = inventory.getListedProducts().get(productName);
+		productList.add(new Product(inventoryProduct));
 	}
 
 	public double calculateTotalCartValue() {
@@ -55,6 +71,17 @@ public class Cart implements ICart{
 		this.totalAmount = totalCost;
 		return totalCost;
 	}
+	
+	public void add(List<String> productNames) {
+
+		productNames.forEach((productName) -> {
+            try {
+                add(productName);
+            } catch (ProductNotPresentInInvetory e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
 	@Override
 	public void add(Product product) {
@@ -88,51 +115,6 @@ public class Cart implements ICart{
 		}
 		
 		return finalPrice;
-	}
-	
-	public static void main(String[] args) {
-		Map<String, Integer> promoDetails1 = new HashMap<>();
-		promoDetails1.put("A", 3);
-		
-		Promotion promotion1 = new Promotion("P1", promoDetails1, 130);
-		
-		Map<String, Integer> promoDetails2 = new HashMap<>();
-		promoDetails2.put("B", 2);
-		
-		Promotion promotion2 = new Promotion("P2", promoDetails2, 45);
-		
-		Map<String, Integer> promoDetails3 = new HashMap<>();
-		promoDetails3.put("C", 1);
-		promoDetails3.put("D", 1);
-		
-		Promotion promotion3 = new Promotion("P3", promoDetails3, 30);
-		
-		List<Promotion> promotionList = new ArrayList<>();
-		promotionList.add(promotion1);
-		promotionList.add(promotion2);
-		promotionList.add(promotion3);
-		
-		System.out.println(promotionList);
-		PromotionEngine promotionEngine = new PromotionEngine();
-		promotionEngine.setPromotionList(promotionList);
-		
-		Cart cart = new Cart(promotionEngine);
-		
-		Product product = new Product("A");
-		cart.add(product);
-		product = new Product("A");
-		cart.add(product);
-		product = new Product("B");
-		cart.add(product);
-		product = new Product("C");
-		cart.add(product);
-		
-		System.out.println(cart.checkout());
-		
-		
-		
-		
-		
 	}
 
 }

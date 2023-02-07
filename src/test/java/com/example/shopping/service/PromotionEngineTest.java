@@ -1,20 +1,33 @@
 package com.example.shopping.service;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import com.example.shopping.model.Inventory;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
 
 import junit.framework.Assert;
 
-public class PromotionEngineTest {	
+public class PromotionEngineTest {
+	
+	private Inventory inventory;
+    private List<Product> products = new ArrayList<>();
+    
+    @Before
+    public void setUp() {
+    	products.add(new Product("A", 50));
+    	products.add(new Product("B", 30));
+    	products.add(new Product("C", 20));
+    	products.add(new Product("D", 15));
+
+        inventory = new Inventory(products);
+    }
 	
 	@Test
 	public void promote() {
@@ -335,7 +348,6 @@ public class PromotionEngineTest {
 		promotionList.add(promotion3);
 		
 		System.out.println(promotionList);
-		PromotionEngine promotionEngine = new PromotionEngine();
-		promotionEngine.setPromotionList(promotionList);
+		PromotionEngine promotionEngine = new PromotionEngine(promotionList);
 	}
 }

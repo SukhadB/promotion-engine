@@ -1,11 +1,11 @@
-package com.example.shopping.model;
+package com.example.shopping.processor;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-import com.example.shopping.processor.IPromoProcessor;
+import com.example.shopping.model.Product;
 
 public class DefaultProcessor implements IPromoProcessor {
+
 
 	@Override
 	public double applyPromotion(List<Product> products) {

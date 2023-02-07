@@ -1,9 +1,6 @@
 package com.example.shopping.processor;
 
-import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;

@@ -10,14 +10,18 @@ import com.example.shopping.model.Promotion;
 
 public class PromotionEngine {
 	
-	private List<Promotion> promotionList; 
+	private List<Promotion> promotionList;
+	
+	public PromotionEngine() {
+		
+	}
+	
+	public PromotionEngine(List<Promotion> promotionList) {
+		this.promotionList = promotionList;
+	}
 
 	public List<Promotion> getPromotionList() {
 		return promotionList;
-	}
-
-	public void setPromotionList(List<Promotion> promotionList) {
-		this.promotionList = promotionList;
 	}
 
 	public double applyPromotion(Cart cart) {
