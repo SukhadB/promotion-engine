@@ -1,8 +1,8 @@
 package com.example.shopping.service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
+import com.example.shopping.exception.ProductNotPresentInInvetory;
 import com.example.shopping.model.Product;
 
 public interface ICart {
@@ -10,11 +10,11 @@ public interface ICart {
 	public List<Product> getProducts();
 
     public void empty();
-
-    public void add(Product product);
+    
+    public void add(String productName) throws ProductNotPresentInInvetory;
 
     public void add(List<String> productNames);
-
+    
     public double calculateTotalCartValue();
 
 

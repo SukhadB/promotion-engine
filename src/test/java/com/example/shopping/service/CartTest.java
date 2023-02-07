@@ -55,11 +55,10 @@ public class CartTest {
 	public void checkout() {
 		Cart cart = new Cart();
 		assertEquals(cart.checkout(), 0.0d, 0.001);
-		
 	}
 	
 	@Test
-	public void Approach2checkout() {
+	public void checkout2() {
 		List<String> order = Arrays.asList("A", "A", "B", "B");
 		
 		Cart cart = new Cart(promotionEngine, inventory);

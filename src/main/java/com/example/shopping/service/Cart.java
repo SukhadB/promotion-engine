@@ -53,25 +53,19 @@ public class Cart implements ICart{
 		this.productList.clear();
 		
 	}
-
-//	public void add(List<Product> productList) {
-//		this.productList = productList;
-//	}
 	
+	@Override
 	public void add(String productName) throws ProductNotPresentInInvetory {
 		Product inventoryProduct = inventory.getListedProducts().get(productName);
 		productList.add(new Product(inventoryProduct));
-	}
-
-	public double calculateTotalCartValue() {
-		double totalCost = 0;
-		for (Product product : productList) {
-			totalCost += product.getPrice();
+		Integer count = this.productCount.get(inventoryProduct.getSKUId());
+		if (count == null) {
+			count = 0;
 		}
-		this.totalAmount = totalCost;
-		return totalCost;
+		this.productCount.put(inventoryProduct.getSKUId(), ++count);
 	}
 	
+	@Override
 	public void add(List<String> productNames) {
 
 		productNames.forEach((productName) -> {
@@ -82,24 +76,15 @@ public class Cart implements ICart{
             }
         });
     }
-
-	@Override
-	public void add(Product product) {
-		if(this.productList == null) {
-			this.productList = new ArrayList<Product>();
-		}
-		this.totalAmount += product.getPrice();
-		Integer count = this.productCount.get(product.getSKUId());
-		if (count == null) {
-			count = 0;
-		}
-		this.productCount.put(product.getSKUId(), ++count);
-		this.productList.add(product);
-	}
 	
 	@Override
-	public String toString() {
-		return "Cart [productList=" + productList + ", totalAmount=" + totalAmount + "]";
+	public double calculateTotalCartValue() {
+		double totalCost = 0;
+		for (Product product : productList) {
+			totalCost += product.getPrice();
+		}
+		this.totalAmount = totalCost;
+		return totalCost;
 	}
 	
 	public double checkout() {
@@ -115,6 +100,11 @@ public class Cart implements ICart{
 		}
 		
 		return finalPrice;
+	}
+	
+	@Override
+	public String toString() {
+		return "Cart [productList=" + productList + ", totalAmount=" + totalAmount + "]";
 	}
 
 }
