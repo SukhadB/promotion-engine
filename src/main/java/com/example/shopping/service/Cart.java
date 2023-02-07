@@ -124,7 +124,7 @@ public class Cart implements ICart{
 		cart.add(product);
 		product = new Product("B");
 		cart.add(product);
-		product = new Product("B");
+		product = new Product("C");
 		cart.add(product);
 		
 		System.out.println(cart.checkout());

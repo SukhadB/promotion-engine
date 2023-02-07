@@ -1,16 +1,12 @@
 package com.example.shopping.service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
-import com.example.shopping.processor.IPromoProcessor;
 
 public class PromotionEngine {
 	

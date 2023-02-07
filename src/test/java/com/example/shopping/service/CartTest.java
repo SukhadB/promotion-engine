@@ -12,12 +12,14 @@ import org.junit.Test;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
 
+import junit.framework.Assert;
+
 public class CartTest {
 	
 	@Test
 	public void checkout() {
 		Cart cart = new Cart();
-		assertEquals(0.00, cart.checkout());
+		Assert.assertEquals(0.0, cart.checkout());
 		
 	}
 	
@@ -25,7 +27,7 @@ public class CartTest {
 	public void Approach2Test1() {
 		
 		Map<String, Integer> promoDetails1 = new HashMap<>();
-		promoDetails1.put("A", 2);
+		promoDetails1.put("A", 3);
 		
 		Promotion promotion1 = new Promotion("P1", promoDetails1, 130);
 		
@@ -56,10 +58,10 @@ public class CartTest {
 		cart.add(product);
 		product = new Product("B");
 		cart.add(product);
-		product = new Product("C");
+		product = new Product("B");
 		cart.add(product);
 		
-		assertEquals(0.00, cart.checkout());
+		Assert.assertEquals(145.00, cart.checkout());
 		
 		
 		
