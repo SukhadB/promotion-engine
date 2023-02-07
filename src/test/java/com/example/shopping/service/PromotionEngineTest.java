@@ -345,4 +345,44 @@ public class PromotionEngineTest {
 		PromotionEngine promotionEngine = new PromotionEngine();
 		assertEquals(null, promotionEngine.findPromo(new Product("A"), 3));
 	}
+	
+	@Test
+	public void Approach2Test1() {
+		
+		Map<String, Integer> promoDetails1 = new HashMap<>();
+		promoDetails1.put("A", 3);
+		
+		PromotionConfiguration promotion1 = new PromotionConfiguration("P1", promoDetails1, 130);
+		
+		Map<String, Integer> promoDetails2 = new HashMap<>();
+		promoDetails2.put("B", 2);
+		
+		PromotionConfiguration promotion2 = new PromotionConfiguration("P2", promoDetails2, 45);
+		
+		Map<String, Integer> promoDetails3 = new HashMap<>();
+		promoDetails3.put("C", 1);
+		promoDetails3.put("D", 1);
+		
+		PromotionConfiguration promotion3 = new PromotionConfiguration("P3", promoDetails3, 30);
+		
+		List<PromotionConfiguration> promotionList = new ArrayList<>();
+		promotionList.add(promotion1);
+		promotionList.add(promotion2);
+		promotionList.add(promotion3);
+		
+		System.out.println(promotionList);
+		PromotionEngine promotionEngine = new PromotionEngine();
+		promotionEngine.setPromotionList(promotionList);
+		
+		Cart cart = new Cart();
+		
+		Product product = new Product("A");
+		cart.add(product);
+		product = new Product("B");
+		cart.add(product);
+		product = new Product("C");
+		cart.add(product);
+		
+		
+	}
 }

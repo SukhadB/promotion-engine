@@ -66,9 +66,9 @@ public class PromotionEngine {
 		return promotedCost;
 	}
 	
-	public BigDecimal applyPromotion(Cart cart, List<IPromoProcessor> promotionList) {
+	public BigDecimal applyPromotion(Cart cart, List<IPromoProcessor> processor) {
 		BigDecimal promotedCost = BigDecimal.ZERO;
-		for (IPromoProcessor iPromoProcessor : promotionList) {
+		for (IPromoProcessor iPromoProcessor : processor) {
 			promotedCost.add(iPromoProcessor.applyPromotion(cart.getProducts()));
 		} 
 		return promotedCost;
