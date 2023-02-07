@@ -2,12 +2,12 @@ package com.example.shopping.model;
 
 public class Product {
 	
-	private String id;
+	private String skuId;
 	private double price;
 	
 	public Product(String id) {
 		super();
-		this.id = id;
+		this.skuId = id;
 		
 		if (id.equals("A")) {
 			this.price = 50;
@@ -21,11 +21,11 @@ public class Product {
 		
 	}
 	
-	public String getId() {
-		return id;
+	public String getSKUId() {
+		return skuId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setSKUId(String id) {
+		this.skuId = id;
 	}
 	public double getPrice() {
 		return price;
@@ -36,7 +36,7 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", price=" + price + "]";
+		return "Product [id=" + skuId + ", price=" + price + "]";
 	}
 	
 

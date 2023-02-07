@@ -24,8 +24,8 @@ public class Promo3Processor extends AbstractPromoProcessor  {
 	@Override
 	public BigDecimal applyPromotion(List<Product> products) {
 		
-		int countOfProductC = products.stream().filter(p -> p.getId().equals("C")).collect(Collectors.toList()).size();
-		int countOfProductD = products.stream().filter(p -> p.getId().equals("D")).collect(Collectors.toList()).size();
+		int countOfProductC = products.stream().filter(p -> p.getSKUId().equals("C")).collect(Collectors.toList()).size();
+		int countOfProductD = products.stream().filter(p -> p.getSKUId().equals("D")).collect(Collectors.toList()).size();
 		
 		double totalCostofProductCPostPromotion = 0;
 		double totalCostofProductDPostPromotion = 0;

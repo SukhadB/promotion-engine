@@ -15,7 +15,7 @@ public interface ICart {
 
     public void add(List<Product> products);
 
-    public BigDecimal calculateFinalPrice();
+    public double calculateTotalCartValue();
 
 
 }

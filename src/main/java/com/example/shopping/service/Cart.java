@@ -3,22 +3,31 @@ package com.example.shopping.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.shopping.model.Inventory;
 import com.example.shopping.model.Product;
 
-public class Cart {
+public class Cart implements ICart{
 	
 	private List<Product> productList;
 	private double totalAmount;
+	
+	private Inventory inventory;
 	
 	public double getTotalAmount() {
 		return totalAmount;
 	}
 
-	public List<Product> getProductList() {
+	public List<Product> getProducts() {
 		return productList;
 	}
+	
+	@Override
+	public void empty() {
+		// TODO Auto-generated method stub
+		
+	}
 
-	public void setProductList(List<Product> productList) {
+	public void add(List<Product> productList) {
 		this.productList = productList;
 	}
 
@@ -31,25 +40,22 @@ public class Cart {
 		return totalCost;
 	}
 
-	public void addProduct(Product product) {
+	@Override
+	public void add(Product product) {
 		if(this.productList == null) {
 			this.productList = new ArrayList<Product>();
 		}
 		this.totalAmount += product.getPrice();
-		this.productList.add(product);		
+		this.productList.add(product);
 	}
 	
-	public double checkout() {
-		double totalCartCost = 0;
-		
-		return totalCartCost;
-	}
-
 	@Override
 	public String toString() {
 		return "Cart [productList=" + productList + ", totalAmount=" + totalAmount + "]";
 	}
 	
-	
+	public double checkout() {
+		return 0;
+	}
 
 }

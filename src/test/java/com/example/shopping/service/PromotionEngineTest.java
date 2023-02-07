@@ -35,7 +35,7 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		Assert.assertEquals(50.00, promotionEngine.applyPromotion(cart));
 		
@@ -49,7 +49,7 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		Assert.assertEquals(50.00, cart.calculateTotalCartValue());
 		
@@ -63,13 +63,13 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		Assert.assertEquals(115.00, cart.calculateTotalCartValue());
 		
@@ -83,11 +83,11 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		Assert.assertEquals(100.00, promotionEngine.applyPromotion(cart));
 	}
@@ -100,27 +100,27 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		Assert.assertEquals(420.00, cart.calculateTotalCartValue());
 	}
@@ -133,29 +133,29 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		Assert.assertEquals(370.00, promotionEngine.applyPromotion(cart));
 	}
@@ -169,28 +169,28 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 
 		Assert.assertEquals(280.00, promotionEngine.applyPromotion(cart));
 	}
@@ -203,25 +203,25 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 
 		Assert.assertEquals(265.00, promotionEngine.applyPromotion(cart));
 	}
@@ -234,30 +234,30 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("A");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("B");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		
 		product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 
 		Assert.assertEquals(300.00, promotionEngine.applyPromotion(cart));
 	}
@@ -270,17 +270,17 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 
 		
 		product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 
 
 		Assert.assertEquals(80.00, promotionEngine.applyPromotion(cart));
@@ -294,17 +294,17 @@ public class PromotionEngineTest {
 		Cart cart = new Cart();
 		
 		Product product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("D");
-		cart.addProduct(product);
+		cart.add(product);
 
 		
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 		product = new Product("C");
-		cart.addProduct(product);
+		cart.add(product);
 
 
 		Assert.assertEquals(75.00, promotionEngine.applyPromotion(cart));

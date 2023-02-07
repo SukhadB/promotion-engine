@@ -27,15 +27,15 @@ public class PromotionEngine {
 
 	public double applyPromotion(Cart cart) {
 		double promotedCost = 0;
-		List<Product> productList = cart.getProductList();
+		List<Product> productList = cart.getProducts();
 		
 		if (productList != null && !productList.isEmpty()) {
-	 		int countOfProductA = productList.stream().filter(p -> p.getId().equals("A")).collect(Collectors.toList()).size();
+	 		int countOfProductA = productList.stream().filter(p -> p.getSKUId().equals("A")).collect(Collectors.toList()).size();
 			
-			int countOfProductB = productList.stream().filter(p -> p.getId().equals("B")).collect(Collectors.toList()).size();
+			int countOfProductB = productList.stream().filter(p -> p.getSKUId().equals("B")).collect(Collectors.toList()).size();
 			
-			int countOfProductC = productList.stream().filter(p -> p.getId().equals("C")).collect(Collectors.toList()).size();
-			int countOfProductD = productList.stream().filter(p -> p.getId().equals("D")).collect(Collectors.toList()).size();
+			int countOfProductC = productList.stream().filter(p -> p.getSKUId().equals("C")).collect(Collectors.toList()).size();
+			int countOfProductD = productList.stream().filter(p -> p.getSKUId().equals("D")).collect(Collectors.toList()).size();
 			
 			double totalCostofProductAPostPromotion = (countOfProductA/3 * 130) + (countOfProductA%3 * 50); 
 			double totalCostofProductBPostPromotion = (countOfProductB/2 * 45) + (countOfProductB%2 * 30); 
@@ -69,7 +69,7 @@ public class PromotionEngine {
 	public BigDecimal applyPromotion(Cart cart, List<IPromoProcessor> promotionList) {
 		BigDecimal promotedCost = BigDecimal.ZERO;
 		for (IPromoProcessor iPromoProcessor : promotionList) {
-			promotedCost.add(iPromoProcessor.applyPromotion(cart.getProductList()));
+			promotedCost.add(iPromoProcessor.applyPromotion(cart.getProducts()));
 		} 
 		return promotedCost;
 	}
