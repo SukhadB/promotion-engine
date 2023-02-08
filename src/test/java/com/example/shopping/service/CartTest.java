@@ -83,7 +83,6 @@ public class CartTest {
 		
 		Cart cart = new Cart(promotionEngine, inventory);
 		cart.add(order);
-		System.out.println(cart.checkout());
 		assertEquals(cart.checkout(), 220.0d, 0.001);
 	}
 	

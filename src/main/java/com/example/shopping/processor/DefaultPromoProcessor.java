@@ -4,6 +4,13 @@ import java.util.List;
 
 import com.example.shopping.model.Product;
 
+/**
+ * The class implements the applyPromotion method to calculate the cost of the
+ * product based marked product price and quantity
+ * 
+ * @author Sukhad Bhole
+ *
+ */
 public class DefaultPromoProcessor implements IPromoProcessor {
 
 

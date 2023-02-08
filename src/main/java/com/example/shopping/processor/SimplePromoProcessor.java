@@ -7,37 +7,45 @@ import java.util.stream.Collectors;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
 
+/**
+ * The class implements the applyPromotion method to calculate the promotional
+ * cost for promotion with single product within the promotion
+ * 
+ * @author Sukhad Bhole
+ *
+ */
 public class SimplePromoProcessor implements IPromoProcessor {
-	
-	Promotion promoConfig = new Promotion();
-	
-	public SimplePromoProcessor(Promotion promoConfig) {
 
-		this.promoConfig = promoConfig;
+	Promotion promotion;
+
+	public SimplePromoProcessor(Promotion promotion) {
+
+		this.promotion = promotion;
 	}
-	
+
 	@Override
 	public double applyPromotion(List<Product> products) {
-		
-		Map<String, Integer> promoDetails = promoConfig.getPromoDetails();
-		int promotionalCost = promoConfig.getPromotionalCost();
-		
+
+		Map<String, Integer> promoDetails = promotion.getPromoDetails();
+		int promotionalCost = promotion.getPromotionalCost();
+
 		double totalApplicablePromotionCost = 0;
-		
+
 		for (Map.Entry<String, Integer> entry : promoDetails.entrySet()) {
 			String key = entry.getKey();
 			Integer val = entry.getValue();
 
-			List<Product> product = products.stream().filter(p -> p.getSKUId().equals(key)).collect(Collectors.toList());
-			
+			List<Product> product = products.stream().filter(p -> p.getSKUId().equals(key))
+					.collect(Collectors.toList());
+
 			double productPrice = product.get(0).getPrice();
-			
-			totalApplicablePromotionCost = product.size()/val * promotionalCost + product.size()%val * productPrice;
-			
+
+			totalApplicablePromotionCost = product.size() / val * promotionalCost + product.size() % val * productPrice;
+
 		}
-		
+
 		return totalApplicablePromotionCost;
-		
+
 	}
 
 }

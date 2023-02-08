@@ -1,6 +1,3 @@
-/**
- * This package consist of the services which will be exposed
- */
 package com.example.shopping.service;
 
 import java.util.ArrayList;
@@ -15,23 +12,36 @@ import com.example.shopping.model.Promotion;
 
 /**
  * The class consists of the Cart details
+ * 
  * @author Sukhad Bhole
  *
  */
-public class Cart implements ICart{
-	
+public class Cart implements ICart {
+
 	private List<Product> productList = new ArrayList<>();
 	private double totalAmount;
+
+	/**
+	 * The count of the product with the cart, the key is the Product Name and the
+	 * value is the count of the product present with the cart
+	 */
 	private Map<String, Integer> productCount = new HashMap<>();
-	
+
 	private PromotionEngine promotionEngine;
 	private Inventory inventory;
-	
+
+	/**
+	 * Constructs the cart object with promotion engine and inventory object
+	 * 
+	 * @param promotionEngine - it holds the list of all the promotion
+	 * @param inventory       - it holds all the product to add within the shopping
+	 *                        cart
+	 */
 	public Cart(PromotionEngine promotionEngine, Inventory inventory) {
 		this.promotionEngine = promotionEngine;
 		this.inventory = inventory;
 	}
-	
+
 	public double getTotalAmount() {
 		return totalAmount;
 	}
@@ -39,17 +49,17 @@ public class Cart implements ICart{
 	public List<Product> getProducts() {
 		return productList;
 	}
-	
-	public Map<String, Integer> getProductCount(){
+
+	public Map<String, Integer> getProductCount() {
 		return this.productCount;
 	}
-	
+
 	@Override
 	public void empty() {
 		this.productList.clear();
-		
+
 	}
-	
+
 	@Override
 	public void add(String productName) throws ProductNotPresentInInvetory {
 		Product inventoryProduct = inventory.getListedProducts().get(productName);
@@ -60,19 +70,19 @@ public class Cart implements ICart{
 		}
 		this.productCount.put(inventoryProduct.getSKUId(), ++count);
 	}
-	
+
 	@Override
 	public void add(List<String> productNames) {
 
 		productNames.forEach((productName) -> {
-            try {
-                add(productName);
-            } catch (ProductNotPresentInInvetory e) {
-                e.printStackTrace();
-            }
-        });
-    }
-	
+			try {
+				add(productName);
+			} catch (ProductNotPresentInInvetory e) {
+				e.printStackTrace();
+			}
+		});
+	}
+
 	@Override
 	public double calculateTotalCartValue() {
 		double totalCost = 0;
@@ -82,25 +92,25 @@ public class Cart implements ICart{
 		this.totalAmount = totalCost;
 		return totalCost;
 	}
-	
+
 	public double checkout() {
 		double finalPrice = 0;
-		
+
 		if (productList != null) {
-		
+
 			Map<Promotion, List<Product>> groupProducts = promotionEngine.findPromo(productList, productCount);
-			
+
 			for (Map.Entry<Promotion, List<Product>> listProductEntry : groupProducts.entrySet()) {
 				finalPrice += listProductEntry.getKey().getProcessor().applyPromotion(listProductEntry.getValue());
-	        }
+			}
 		}
-		
+
 		return finalPrice;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Cart [productList=" + productList + ", totalAmount=" + totalAmount + "]";
+		return "Cart [productList=" + productList + ", totalAmount=" + totalAmount + ", productCount=" + productCount
+				+ ", promotionEngine=" + promotionEngine + ", inventory=" + inventory + "]";
 	}
-
 }
