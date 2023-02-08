@@ -16,15 +16,12 @@ import com.example.shopping.model.Promotion;
  */
 public class SimplePromoProcessor implements IPromoProcessor {
 
-	Promotion promotion;
+	public SimplePromoProcessor() {
 
-	public SimplePromoProcessor(Promotion promotion) {
-
-		this.promotion = promotion;
 	}
 
 	@Override
-	public double applyPromotion(List<Product> products) {
+	public double applyPromotion(List<Product> products, Promotion promotion) {
 
 		Map<String, Integer> promoDetails = promotion.getPromoDetails();
 		int promotionalCost = promotion.getPromotionalCost();

@@ -101,7 +101,8 @@ public class Cart implements ICart {
 			Map<Promotion, List<Product>> groupProducts = promotionEngine.findPromo(productList, productCount);
 
 			for (Map.Entry<Promotion, List<Product>> listProductEntry : groupProducts.entrySet()) {
-				finalPrice += listProductEntry.getKey().getProcessor().applyPromotion(listProductEntry.getValue());
+				finalPrice += promotionEngine.getPromoProcessor(listProductEntry.getKey().getPromotionType())
+						.applyPromotion(listProductEntry.getValue(), listProductEntry.getKey());
 			}
 		}
 

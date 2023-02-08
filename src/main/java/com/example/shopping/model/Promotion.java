@@ -2,13 +2,10 @@ package com.example.shopping.model;
 
 import java.util.Map;
 
-import com.example.shopping.processor.ComplexPromoProcessor;
-import com.example.shopping.processor.DefaultPromoProcessor;
-import com.example.shopping.processor.IPromoProcessor;
-import com.example.shopping.processor.SimplePromoProcessor;
+import com.example.shopping.processor.PromotionProcessorType;
 
 /**
- * The Promotion class holds the details of the promotion available with the 
+ * The Promotion class holds the details of the promotion available with the
  * Application
  * 
  * @author Sukhad Bhole
@@ -17,34 +14,33 @@ import com.example.shopping.processor.SimplePromoProcessor;
 public class Promotion {
 
 	private String promoCode;
-	
+
 	/**
-	 * the attributes consists of the details of the promotion
-	 * the key is the product name and the value is the count 
-	 * of the product for which the promotion will be applicable
+	 * the attributes consists of the details of the promotion the key is the
+	 * product name and the value is the count of the product for which the
+	 * promotion will be applicable
 	 * 
 	 */
 	private Map<String, Integer> promoDetails;
-	
+
 	private int promotionalCost;
-	private String promotionType;
-	
-	private IPromoProcessor processor;
-	
+	private PromotionProcessorType processorType;
+
 	/**
 	 * Construct Default Promotion where the marked product price is considered
 	 */
 	public Promotion() {
-		this.promotionType = "Default";
-		this.processor = new DefaultPromoProcessor();
+		this.processorType = PromotionProcessorType.DEFAULT_PROCESSOR;
 	}
 
 	/**
 	 * Constructs new promotion object with the parameters required
-	 * @param promotionCode - promotion Code
-	 * @param promoDetails - details of the promotion based on product and count of the product
-	 * when the promotion is applied 
-	 * @param promotionalCost - promotionalCost which is applicable when the promotion is applied
+	 * 
+	 * @param promotionCode   - promotion Code
+	 * @param promoDetails    - details of the promotion based on product and count
+	 *                        of the product when the promotion is applied
+	 * @param promotionalCost - promotionalCost which is applicable when the
+	 *                        promotion is applied
 	 */
 	public Promotion(String promotionCode, Map<String, Integer> promoDetails, int promotionalCost) {
 		super();
@@ -52,24 +48,20 @@ public class Promotion {
 		this.promoDetails = promoDetails;
 		this.promotionalCost = promotionalCost;
 		if (promoDetails.entrySet().size() == 1) {
-			promotionType = "Simple";
-			processor = new SimplePromoProcessor(this);
+			processorType = PromotionProcessorType.SIMPLE_PROCESSOR;
 		} else {
-			promotionType = "Complex";
-			processor = new ComplexPromoProcessor(this);
+			processorType = PromotionProcessorType.COMPLEX_PROCESSOR;
 		}
-		
+
 	}
 
-	/** 
-	 * Construct new promotion basis the promotion type provided 
-	 * @param promotionType - the promotion type 
+	/**
+	 * Construct new promotion basis the promotion type provided
+	 * 
+	 * @param processorType - the promotion type
 	 */
-	public Promotion(String promotionType) {
-		this.promotionType = promotionType;
-		if (promotionType != null && promotionType.equals("Default")) {
-			processor = new DefaultPromoProcessor();
-		}
+	public Promotion(PromotionProcessorType processorType) {
+		this.processorType = processorType;
 	}
 
 	public String getPromoCode() {
@@ -87,14 +79,14 @@ public class Promotion {
 	public void setPromoDetails(Map<String, Integer> promoDetails) {
 		this.promoDetails = promoDetails;
 		if (promoDetails.entrySet().size() == 1) {
-			promotionType = "Simple";
+			processorType = PromotionProcessorType.SIMPLE_PROCESSOR;
 		} else {
-			promotionType = "Complex";
+			processorType = PromotionProcessorType.COMPLEX_PROCESSOR;
 		}
 	}
 
-	public String getPromotionType() {
-		return promotionType;
+	public PromotionProcessorType getPromotionType() {
+		return processorType;
 	}
 
 	public int getPromotionalCost() {
@@ -105,13 +97,9 @@ public class Promotion {
 		this.promotionalCost = promotionalCost;
 	}
 
-	public IPromoProcessor getProcessor() {
-		return this.processor;
-	}
-
 	@Override
 	public String toString() {
 		return "Promotion [promoCode=" + promoCode + ", promoDetails=" + promoDetails + ", promotionalCost="
-				+ promotionalCost + ", promotionType=" + promotionType + ", processor=" + processor + "]";
+				+ promotionalCost + ", processorType=" + processorType + "]";
 	}
 }

@@ -1,5 +1,6 @@
 package com.example.shopping.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -8,6 +9,11 @@ import java.util.stream.Collectors;
 
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
+import com.example.shopping.processor.ComplexPromoProcessor;
+import com.example.shopping.processor.DefaultPromoProcessor;
+import com.example.shopping.processor.IPromoProcessor;
+import com.example.shopping.processor.PromotionProcessorType;
+import com.example.shopping.processor.SimplePromoProcessor;
 
 /**
  * The class helps to add and find promotion basis the product available within
@@ -20,6 +26,8 @@ public class PromotionEngine {
 
 	private List<Promotion> promotionList;
 
+	public Map<PromotionProcessorType, IPromoProcessor> mapOfPromoProcessor = new HashMap<>();
+
 	/**
 	 * Constructs Promotion Engine with the list of promotion
 	 * 
@@ -27,10 +35,25 @@ public class PromotionEngine {
 	 */
 	public PromotionEngine(List<Promotion> promotionList) {
 		this.promotionList = promotionList;
+
+		mapOfPromoProcessor.put(PromotionProcessorType.DEFAULT_PROCESSOR, new DefaultPromoProcessor());
+
+		for (Promotion promotion : promotionList) {
+			if (promotion.getPromotionType().equals(PromotionProcessorType.COMPLEX_PROCESSOR)) {
+				mapOfPromoProcessor.put(PromotionProcessorType.COMPLEX_PROCESSOR, new ComplexPromoProcessor());
+			} else if (promotion.getPromotionType().equals(PromotionProcessorType.SIMPLE_PROCESSOR)) {
+				mapOfPromoProcessor.put(PromotionProcessorType.SIMPLE_PROCESSOR, new SimplePromoProcessor());
+			}
+		}
+
 	}
 
 	public List<Promotion> getPromotionList() {
 		return promotionList;
+	}
+
+	public IPromoProcessor getPromoProcessor(PromotionProcessorType promoProcessorType) {
+		return mapOfPromoProcessor.get(promoProcessorType);
 	}
 
 	/**

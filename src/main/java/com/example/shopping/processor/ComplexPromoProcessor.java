@@ -15,15 +15,8 @@ import com.example.shopping.model.Promotion;
  */
 public class ComplexPromoProcessor implements IPromoProcessor {
 
-	Promotion promotion;
-
-	public ComplexPromoProcessor(Promotion promotion) {
-
-		this.promotion = promotion;
-	}
-
 	@Override
-	public double applyPromotion(List<Product> products) {
+	public double applyPromotion(List<Product> products, Promotion promotion) {
 
 		int countOfProductC = products.stream().filter(p -> p.getSKUId().equals("C")).collect(Collectors.toList())
 				.size();

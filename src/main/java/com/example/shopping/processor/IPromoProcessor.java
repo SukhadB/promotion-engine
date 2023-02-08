@@ -3,6 +3,7 @@ package com.example.shopping.processor;
 import java.util.List;
 
 import com.example.shopping.model.Product;
+import com.example.shopping.model.Promotion;
 
 /**
  * Classes that implement the interface needs to implement the applyPromotion
@@ -14,6 +15,6 @@ import com.example.shopping.model.Product;
  */
 public interface IPromoProcessor {
 
-	public double applyPromotion(List<Product> products);
+	public double applyPromotion(List<Product> products, Promotion promotion);
 
 }
