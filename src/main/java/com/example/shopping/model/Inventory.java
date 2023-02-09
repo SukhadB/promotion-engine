@@ -17,7 +17,7 @@ public class Inventory {
 	/**
 	 * Constructs the inventory object with the list of Product
 	 * 
-	 * @param - productList the Product List
+	 * @param productList the Product List
 	 */
 	public Inventory(List<Product> productList) {
 		productList.stream().forEach(p -> {
@@ -27,7 +27,8 @@ public class Inventory {
 
 	/**
 	 * returns all the product available with the inventory
-	 * @return map of the product within the inventory 
+	 * 
+	 * @return map of the product within the inventory
 	 */
 	public Map<String, Product> getListedProducts() {
 		return listedProducts;

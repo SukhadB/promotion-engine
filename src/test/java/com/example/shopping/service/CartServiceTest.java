@@ -22,21 +22,16 @@ public class CartServiceTest {
 	private Inventory inventory;
 	private PromotionEngine promotionEngine;
 	private List<Product> products = new ArrayList<>();
-	
+
 	private CartService cartService;
 
 	@Before
-	public void setUp() {
-		
-		try {
-			products.add(new Product("A", 50));
-			products.add(new Product("B", 30));
-			products.add(new Product("C", 20));
-			products.add(new Product("D", 15));
-		} catch (ProductNotPresentInInvetory e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public void initialConfiguration() throws ProductNotPresentInInvetory {
+
+		products.add(new Product("A", 50));
+		products.add(new Product("B", 30));
+		products.add(new Product("C", 20));
+		products.add(new Product("D", 15));
 
 		List<Promotion> promotionList = new ArrayList<>();
 		Map<String, Integer> promoDetails1 = new HashMap<>();
@@ -57,7 +52,7 @@ public class CartServiceTest {
 
 		promotionEngine = new PromotionEngine(promotionList);
 		inventory = new Inventory(products);
-		
+
 		cartService = CartService.getInstance();
 		cartService.setPromotionEngine(promotionEngine);
 	}
@@ -71,7 +66,7 @@ public class CartServiceTest {
 	@Test
 	public void checkout2() {
 		List<String> order = Arrays.asList("A", "A", "B", "B");
-		
+
 		Cart cart = new Cart(inventory);
 		cart.add(order);
 

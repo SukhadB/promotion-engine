@@ -17,8 +17,8 @@ public class Product {
 	/**
 	 * Constructs the new product with the required parameter
 	 * 
-	 * @param skuId - Stock Keeping Unit Identifier of the product
-	 * @param price - Price of the Product
+	 * @param skuId Stock Keeping Unit Identifier of the product
+	 * @param price Price of the Product
 	 */
 	public Product(String skuId, double price) throws ProductNotPresentInInvetory {
 		if (skuId == null || skuId.equals("")) {

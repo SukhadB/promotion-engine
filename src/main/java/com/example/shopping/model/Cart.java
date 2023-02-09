@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.example.shopping.exception.ProductNotPresentInInvetory;
 
@@ -13,10 +15,12 @@ import com.example.shopping.exception.ProductNotPresentInInvetory;
  * @author Sukhad Bhole
  *
  */
-public class Cart {
+public class Cart implements ICart {
 
 	private List<Product> productList = new ArrayList<>();
 	private double totalAmount;
+	
+	Logger logger = Logger.getLogger(Cart.class.getName());
 
 	/**
 	 * The count of the product with the cart, the key is the Product Name and the
@@ -25,7 +29,7 @@ public class Cart {
 	private Map<String, Integer> productCount = new HashMap<>();
 
 	/**
-	 * The invetory with details of the product available for buying
+	 * The inventory with details of the product available for buying
 	 */
 	private Inventory inventory;
 
@@ -87,7 +91,7 @@ public class Cart {
 			try {
 				add(productName);
 			} catch (ProductNotPresentInInvetory e) {
-				e.printStackTrace();
+				logger.log(Level.FINE, e.getMessage());
 			}
 		});
 	}
