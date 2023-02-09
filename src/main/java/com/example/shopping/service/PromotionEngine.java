@@ -14,6 +14,7 @@ import com.example.shopping.model.Promotion;
 import com.example.shopping.processor.ComplexPromoProcessor;
 import com.example.shopping.processor.DefaultPromoProcessor;
 import com.example.shopping.processor.IPromoProcessor;
+import com.example.shopping.processor.PercentagePromoProcessor;
 import com.example.shopping.processor.PromotionProcessorType;
 import com.example.shopping.processor.SimplePromoProcessor;
 
@@ -53,6 +54,8 @@ public class PromotionEngine {
 				mapOfPromoProcessor.put(PromotionProcessorType.COMPLEX_PROCESSOR, new ComplexPromoProcessor());
 			} else if (promotion.getPromotionType().equals(PromotionProcessorType.SIMPLE_PROCESSOR)) {
 				mapOfPromoProcessor.put(PromotionProcessorType.SIMPLE_PROCESSOR, new SimplePromoProcessor());
+			} else if (promotion.getPromotionType().equals(PromotionProcessorType.PERCENTAGE_PROCESSOR)) {
+				mapOfPromoProcessor.put(PromotionProcessorType.PERCENTAGE_PROCESSOR, new PercentagePromoProcessor());
 			}
 		}
 

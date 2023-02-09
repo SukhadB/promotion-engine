@@ -24,6 +24,7 @@ public class Promotion {
 	private Map<String, Integer> promoDetails;
 
 	private int promotionalCost;
+	private int promotionalPercentage;
 	private PromotionProcessorType processorType;
 
 	/**
@@ -71,8 +72,12 @@ public class Promotion {
 		this.promoDetails = promoDetails;
 		if (promoDetails.entrySet().size() == 1) {
 			processorType = PromotionProcessorType.SIMPLE_PROCESSOR;
-		} else {
+		} else if (promoDetails.entrySet().size() == 2) {
 			processorType = PromotionProcessorType.COMPLEX_PROCESSOR;
+		} 
+		
+		if (promotionalPercentage != 0) {
+			processorType = PromotionProcessorType.PERCENTAGE_PROCESSOR;
 		}
 	}
 
@@ -86,6 +91,14 @@ public class Promotion {
 
 	public void setPromotionalCost(int promotionalCost) {
 		this.promotionalCost = promotionalCost;
+	}
+	
+	public int getPromotionalPercentage() {
+		return promotionalPercentage;
+	}
+
+	public void setPromotionalPercentage(int promotionalPercentage) {
+		this.promotionalPercentage = promotionalPercentage;
 	}
 
 	@Override
