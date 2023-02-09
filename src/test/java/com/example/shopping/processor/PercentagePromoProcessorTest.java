@@ -13,11 +13,11 @@ import com.example.shopping.exception.ProductNotPresentInInvetory;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
 
-public class SimplePromoProcessorTest {
+public class PercentagePromoProcessorTest {
 
 	@Test
 	public void testApplyPromotionwithNull() {
-		SimplePromoProcessor promoProcessor = new SimplePromoProcessor();
+		PercentagePromoProcessor promoProcessor = new PercentagePromoProcessor();
 		assertEquals(promoProcessor.applyPromotion(null, null), 0.0d, 0.001);
 	}
 
@@ -26,13 +26,13 @@ public class SimplePromoProcessorTest {
 		List<Product> products = new ArrayList<>();
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("A", 3);
-		Promotion promotion = new Promotion("P1", promoDetails1, 130, 0);
+		Promotion promotion = new Promotion("P1", promoDetails1, 0, 50);
 		Product a = new Product("A", 50);
 		products.add(a);
 		products.add(a);
 		products.add(a);
-		SimplePromoProcessor promoProcessor = new SimplePromoProcessor();
-		assertEquals(promoProcessor.applyPromotion(products, promotion), 130.0d, 0.001);
+		PercentagePromoProcessor promoProcessor = new PercentagePromoProcessor();
+		assertEquals(promoProcessor.applyPromotion(products, promotion), 75.0d, 0.001);
 	}
 
 	@Test
@@ -40,12 +40,12 @@ public class SimplePromoProcessorTest {
 		List<Product> products = new ArrayList<>();
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("B", 2);
-		Promotion promotion = new Promotion("P2", promoDetails1, 45, 0);
+		Promotion promotion = new Promotion("P2", promoDetails1, 0, 45);
 		Product b = new Product("B", 30);
 		products.add(b);
 		products.add(b);
-		SimplePromoProcessor promoProcessor = new SimplePromoProcessor();
-		assertEquals(promoProcessor.applyPromotion(products, promotion), 45.0d, 0.001);
+		PercentagePromoProcessor promoProcessor = new PercentagePromoProcessor();
+		assertEquals(promoProcessor.applyPromotion(products, promotion), 27.0d, 0.001);
 	}
 
 	@Test
@@ -53,14 +53,14 @@ public class SimplePromoProcessorTest {
 		List<Product> products = new ArrayList<>();
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("B", 2);
-		Promotion promotion = new Promotion("P2", promoDetails1, 45, 0);
+		Promotion promotion = new Promotion("P2", promoDetails1, 0, 80);
 		Product b = new Product("B", 30);
 		products.add(b);
 		products.add(b);
 		products.add(b);
 		products.add(b);
 		products.add(b);
-		SimplePromoProcessor promoProcessor = new SimplePromoProcessor();
+		PercentagePromoProcessor promoProcessor = new PercentagePromoProcessor();
 		assertEquals(promoProcessor.applyPromotion(products, promotion), 120.0d, 0.001);
 	}
 
@@ -69,14 +69,14 @@ public class SimplePromoProcessorTest {
 		List<Product> products = new ArrayList<>();
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("B", 2);
-		Promotion promotion = new Promotion("P2", promoDetails1, 45, 0);
+		Promotion promotion = new Promotion("P2", promoDetails1, 0, 80);
 		Product b = new Product("B", 30);
 		products.add(b);
 		products.add(b);
 		products.add(b);
 		products.add(b);
 		products.add(b);
-		SimplePromoProcessor promoProcessor = new SimplePromoProcessor();
+		PercentagePromoProcessor promoProcessor = new PercentagePromoProcessor();
 		assertEquals(promoProcessor.applyPromotion(products, promotion), 120.0d, 0.001);
 	}
 

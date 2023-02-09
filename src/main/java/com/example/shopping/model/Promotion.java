@@ -43,15 +43,18 @@ public class Promotion {
 	 * @param promotionalCost - promotionalCost which is applicable when the
 	 *                        promotion is applied
 	 */
-	public Promotion(String promotionCode, Map<String, Integer> promoDetails, int promotionalCost) {
+	public Promotion(String promotionCode, Map<String, Integer> promoDetails, int promotionalCost, int promotionalPercentage) {
 		super();
 		this.promoCode = promotionCode;
 		this.promoDetails = promoDetails;
 		this.promotionalCost = promotionalCost;
-		if (promoDetails.entrySet().size() == 1) {
+		this.promotionalPercentage = promotionalPercentage;
+		if (promoDetails.entrySet().size() == 1 && promotionalCost != 0) {
 			processorType = PromotionProcessorType.SIMPLE_PROCESSOR;
-		} else {
+		} else if (promoDetails.entrySet().size() > 1) {
 			processorType = PromotionProcessorType.COMPLEX_PROCESSOR;
+		} else if (promoDetails.entrySet().size() == 1 && promotionalPercentage != 0) {
+			processorType = PromotionProcessorType.PERCENTAGE_PROCESSOR;
 		}
 
 	}
@@ -74,10 +77,6 @@ public class Promotion {
 			processorType = PromotionProcessorType.SIMPLE_PROCESSOR;
 		} else if (promoDetails.entrySet().size() == 2) {
 			processorType = PromotionProcessorType.COMPLEX_PROCESSOR;
-		} 
-		
-		if (promotionalPercentage != 0) {
-			processorType = PromotionProcessorType.PERCENTAGE_PROCESSOR;
 		}
 	}
 
@@ -99,6 +98,10 @@ public class Promotion {
 
 	public void setPromotionalPercentage(int promotionalPercentage) {
 		this.promotionalPercentage = promotionalPercentage;
+		this.promotionalCost = 0;
+		if (promotionalPercentage != 0) {
+			processorType = PromotionProcessorType.PERCENTAGE_PROCESSOR;
+		}
 	}
 
 	@Override

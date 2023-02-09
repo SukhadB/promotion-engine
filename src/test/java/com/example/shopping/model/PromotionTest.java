@@ -24,7 +24,7 @@ public class PromotionTest {
 	public void testCreateSimplePromotion() {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("A", 3);
-		Promotion promotion = new Promotion("P1", promoDetails1, 130);
+		Promotion promotion = new Promotion("P1", promoDetails1, 130, 0);
 		assertNotNull(promotion);
 		assertTrue(promotion.getPromoCode() != null);
 		assertTrue(promotion.getPromotionType() != null);
@@ -36,7 +36,7 @@ public class PromotionTest {
 	public void testCreateSimplePromotionWithDifferentProduct() {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("B", 2);
-		Promotion promotion = new Promotion("P2", promoDetails1, 45);
+		Promotion promotion = new Promotion("P2", promoDetails1, 45, 0);
 		assertNotNull(promotion);
 		assertTrue(promotion.getPromoCode() != null);
 		assertTrue(promotion.getPromotionType() != null);
@@ -49,11 +49,23 @@ public class PromotionTest {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("C", 1);
 		promoDetails1.put("D", 1);
-		Promotion promotion = new Promotion("P3", promoDetails1, 30);
+		Promotion promotion = new Promotion("P3", promoDetails1, 30, 0);
 		assertNotNull(promotion);
 		assertTrue(promotion.getPromoCode() != null);
 		assertTrue(promotion.getPromotionType() != null);
 		assertTrue(promotion.getPromotionType() == PromotionProcessorType.COMPLEX_PROCESSOR);
+		
+	}
+	
+	@Test
+	public void testCreatePercentagePromotion() {
+		Map<String, Integer> promoDetails1 = new HashMap<>();
+		promoDetails1.put("A", 3);
+		Promotion promotion = new Promotion("P4", promoDetails1, 0, 59);
+		assertNotNull(promotion);
+		assertTrue(promotion.getPromoCode() != null);
+		assertTrue(promotion.getPromotionType() != null);
+		assertTrue(promotion.getPromotionType() == PromotionProcessorType.PERCENTAGE_PROCESSOR);
 		
 	}
 

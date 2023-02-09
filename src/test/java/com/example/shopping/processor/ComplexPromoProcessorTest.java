@@ -27,7 +27,7 @@ public class ComplexPromoProcessorTest {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("C", 1);
 		promoDetails1.put("D", 1);
-		Promotion promotion = new Promotion("P1", promoDetails1, 30);
+		Promotion promotion = new Promotion("P1", promoDetails1, 30, 0);
 		products.add(new Product("C", 20));
 		products.add(new Product("D", 15));
 		ComplexPromoProcessor promoProcessor = new ComplexPromoProcessor();
@@ -40,7 +40,7 @@ public class ComplexPromoProcessorTest {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("C", 1);
 		promoDetails1.put("D", 1);
-		Promotion promotion = new Promotion("P1", promoDetails1, 30);
+		Promotion promotion = new Promotion("P1", promoDetails1, 30, 0);
 		products.add(new Product("C", 20));
 		// TODO Auto-generated catch block
 		ComplexPromoProcessor promoProcessor = new ComplexPromoProcessor();
@@ -53,7 +53,7 @@ public class ComplexPromoProcessorTest {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("C", 1);
 		promoDetails1.put("D", 1);
-		Promotion promotion = new Promotion("P1", promoDetails1, 30);
+		Promotion promotion = new Promotion("P1", promoDetails1, 30, 0);
 		products.add(new Product("D", 15));
 		ComplexPromoProcessor promoProcessor = new ComplexPromoProcessor();
 		assertEquals(promoProcessor.applyPromotion(products, promotion), 15.0d, 0.001);
@@ -65,7 +65,7 @@ public class ComplexPromoProcessorTest {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("C", 1);
 		promoDetails1.put("D", 1);
-		Promotion promotion = new Promotion("P1", promoDetails1, 30);
+		Promotion promotion = new Promotion("P1", promoDetails1, 30, 0);
 		Product c = new Product("C", 20);
 		Product d = new Product("D", 15);
 		products.add(c);
@@ -82,7 +82,7 @@ public class ComplexPromoProcessorTest {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("C", 1);
 		promoDetails1.put("D", 1);
-		Promotion promotion = new Promotion("P1", promoDetails1, 30);
+		Promotion promotion = new Promotion("P1", promoDetails1, 30, 0);
 		Product c = new Product("C", 20);
 		Product d = new Product("D", 15);
 		products.add(c);
@@ -100,7 +100,7 @@ public class ComplexPromoProcessorTest {
 		Map<String, Integer> promoDetails1 = new HashMap<>();
 		promoDetails1.put("C", 1);
 		promoDetails1.put("D", 1);
-		Promotion promotion = new Promotion("P1", promoDetails1, 30);
+		Promotion promotion = new Promotion("P1", promoDetails1, 30, 0);
 		Product c = new Product("C", 20);
 		Product d = new Product("D", 15);
 		products.add(c);
