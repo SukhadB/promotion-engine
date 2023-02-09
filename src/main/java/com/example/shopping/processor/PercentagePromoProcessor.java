@@ -7,8 +7,23 @@ import java.util.stream.Collectors;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
 
+/**
+ * The class implements the applyPromotion method to calculate the cost of the
+ * product based on percentage of product price
+ * 
+ * @author Sukhad Bhole
+ *
+ */
 public class PercentagePromoProcessor implements IPromoProcessor {
 
+	/**
+	 * Calculates the total applicable cost of the matching product list and the
+	 * promotion applicable for percentage
+	 * 
+	 * @param products  matching set for the promotion
+	 * @param promotion promotion applicable
+	 * @return total cost applicable post applicable promotion is applied
+	 */
 	@Override
 	public double applyPromotion(List<Product> products, Promotion promotion) {
 		
