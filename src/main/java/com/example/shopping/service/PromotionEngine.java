@@ -1,5 +1,6 @@
 package com.example.shopping.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +8,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import com.example.shopping.model.Cart;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
 import com.example.shopping.processor.ComplexPromoProcessor;
@@ -24,8 +26,14 @@ import com.example.shopping.processor.SimplePromoProcessor;
  */
 public class PromotionEngine {
 
-	private List<Promotion> promotionList;
+	/**
+	 * List of all promotions within the application
+	 */
+	private List<Promotion> promotionList = new ArrayList<>();
 
+	/**
+	 * The map of promotion processor type
+	 */
 	public Map<PromotionProcessorType, IPromoProcessor> mapOfPromoProcessor = new HashMap<>();
 
 	/**
@@ -34,7 +42,9 @@ public class PromotionEngine {
 	 * @param promotionList
 	 */
 	public PromotionEngine(List<Promotion> promotionList) {
-		this.promotionList = promotionList;
+		if (promotionList != null) {
+			this.promotionList.addAll(promotionList);
+		}
 
 		mapOfPromoProcessor.put(PromotionProcessorType.DEFAULT_PROCESSOR, new DefaultPromoProcessor());
 
@@ -48,6 +58,42 @@ public class PromotionEngine {
 
 	}
 
+	/**
+	 * Constructs Promotion Engine with the promotion
+	 * 
+	 * @param promotion within the application
+	 */
+	public PromotionEngine(Promotion promotion) {
+		if (promotion != null) {
+			this.promotionList.add(promotion);
+		}
+
+		if (promotion.getPromotionType().equals(PromotionProcessorType.COMPLEX_PROCESSOR)) {
+			mapOfPromoProcessor.put(PromotionProcessorType.COMPLEX_PROCESSOR, new ComplexPromoProcessor());
+		} else if (promotion.getPromotionType().equals(PromotionProcessorType.SIMPLE_PROCESSOR)) {
+			mapOfPromoProcessor.put(PromotionProcessorType.SIMPLE_PROCESSOR, new SimplePromoProcessor());
+		}
+
+	}
+	
+	/**
+	 * Add promotion to the Promotion List
+	 * 
+	 * @param promotion within the application
+	 */
+	public void add(Promotion promotion) {
+		if (promotion != null) {
+			this.promotionList.add(promotion);
+		}
+
+		if (promotion.getPromotionType().equals(PromotionProcessorType.COMPLEX_PROCESSOR)) {
+			mapOfPromoProcessor.put(PromotionProcessorType.COMPLEX_PROCESSOR, new ComplexPromoProcessor());
+		} else if (promotion.getPromotionType().equals(PromotionProcessorType.SIMPLE_PROCESSOR)) {
+			mapOfPromoProcessor.put(PromotionProcessorType.SIMPLE_PROCESSOR, new SimplePromoProcessor());
+		}
+
+	}
+
 	public List<Promotion> getPromotionList() {
 		return promotionList;
 	}
@@ -57,11 +103,46 @@ public class PromotionEngine {
 	}
 
 	/**
-	 * This method is first approach towards the give problem of the
+	 * This methods finds the promotion applicable for the product list with the
+	 * Cart
+	 * 
+	 * @param productList  - All the list of product with the cart
+	 * @param productCount - the product and the quantity of the product with the
+	 *                     cart
+	 * @return - the Promotion and the matching set of the product for the promotion
+	 */
+	public Map<Promotion, List<Product>> getPromoForCart(List<Product> productList, Map<String, Integer> productCount) {
+		return productList.stream().collect(Collectors.groupingBy(i -> {
+			String skuId = i.getSKUId();
+
+			int count = productCount.get(skuId);
+
+			Optional<Promotion> optional = promotionList.stream()
+					.filter(p -> p.getPromoDetails().containsKey(skuId) && count >= p.getPromoDetails().get(skuId))
+					.findFirst();
+
+			Promotion promotion = null;
+
+			if (optional != null) {
+				try {
+					promotion = optional.get();
+					return promotion;
+				} catch (NoSuchElementException e) {
+					return new Promotion();
+				}
+			} else {
+				return new Promotion();
+			}
+
+		}, Collectors.toList()));
+	}
+
+	/**
+	 * This method is first approach towards the given problem of the
 	 * promotion-engine
 	 * 
-	 * @param cart - the cart object with the details of the product
-	 * @return - the total amount after the all the promotion are applied
+	 * @param cart the cart object with the details of the product
+	 * @return the total amount after the all the promotion are applied
 	 */
 	public double applyPromotion(Cart cart) {
 		double promotedCost = 0;
@@ -107,60 +188,6 @@ public class PromotionEngine {
 					+ totalCostofProductCPostPromotion + totalCostofProductDPostPromotion;
 		}
 		return promotedCost;
-	}
-
-	public Promotion findPromo(String productName, int count) {
-		Promotion promotion = null;
-		Optional<Promotion> optional = promotionList.stream().filter(
-				p -> p.getPromoDetails().containsKey(productName) && count >= p.getPromoDetails().get(productName))
-				.findFirst();
-
-		if (optional != null) {
-			try {
-				promotion = optional.get();
-			} catch (NoSuchElementException e) {
-				promotion = new Promotion();
-			}
-		} else {
-			promotion = new Promotion();
-		}
-
-		return promotion;
-	}
-
-	/**
-	 * This methods finds the promotion applicable for the product list with the
-	 * Cart
-	 * 
-	 * @param productList  - All the list of product with the cart
-	 * @param productCount - the product and the quantity of the product with the
-	 *                     cart
-	 * @return - the Promotion and the matching set of the product for the promotion
-	 */
-	public Map<Promotion, List<Product>> findPromo(List<Product> productList, Map<String, Integer> productCount) {
-		return productList.stream().collect(Collectors.groupingBy(i -> {
-			String skuId = i.getSKUId();
-
-			int count = productCount.get(skuId);
-
-			Optional<Promotion> optional = promotionList.stream()
-					.filter(p -> p.getPromoDetails().containsKey(skuId) && count >= p.getPromoDetails().get(skuId))
-					.findFirst();
-
-			Promotion promotion = null;
-
-			if (optional != null) {
-				try {
-					promotion = optional.get();
-					return promotion;
-				} catch (NoSuchElementException e) {
-					return new Promotion();
-				}
-			} else {
-				return new Promotion();
-			}
-
-		}, Collectors.toList()));
 	}
 
 	/*
@@ -226,6 +253,19 @@ public class PromotionEngine {
 	 * applicablePromotions.put(defaultPromotion, existingProducts); } }
 	 * 
 	 * }
+	 * 
+	 * 
+	 * public Promotion findPromo(String productName, int count) { Promotion
+	 * promotion = null; Optional<Promotion> optional =
+	 * promotionList.stream().filter( p ->
+	 * p.getPromoDetails().containsKey(productName) && count >=
+	 * p.getPromoDetails().get(productName)) .findFirst();
+	 * 
+	 * if (optional != null) { try { promotion = optional.get(); } catch
+	 * (NoSuchElementException e) { promotion = new Promotion(); } } else {
+	 * promotion = new Promotion(); }
+	 * 
+	 * return promotion; }
 	 */
 
 }

@@ -1,4 +1,4 @@
-package com.example.shopping.service;
+package com.example.shopping.model;
 
 import java.util.List;
 

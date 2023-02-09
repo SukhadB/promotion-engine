@@ -20,7 +20,10 @@ public class Product {
 	 * @param skuId - Stock Keeping Unit Identifier of the product
 	 * @param price - Price of the Product
 	 */
-	public Product(String skuId, double price) {
+	public Product(String skuId, double price) throws ProductNotPresentInInvetory {
+		if (skuId == null || skuId.equals("")) {
+			throw new IllegalArgumentException("skuid cannot be null");
+		}
 		this.skuId = skuId;
 		this.price = price;
 	}

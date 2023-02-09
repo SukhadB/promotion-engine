@@ -16,29 +16,36 @@ import com.example.shopping.model.Promotion;
  */
 public class SimplePromoProcessor implements IPromoProcessor {
 
-	public SimplePromoProcessor() {
-
-	}
-
+	/**
+	 * Calculates the total applicable cost of the matching product list and the
+	 * promotion applicable
+	 * 
+	 * @param products  matching set for the promotion
+	 * @param promotion promotion applicable
+	 * @return total cost applicable post applicable promotion is applied
+	 */
 	@Override
 	public double applyPromotion(List<Product> products, Promotion promotion) {
 
-		Map<String, Integer> promoDetails = promotion.getPromoDetails();
-		int promotionalCost = promotion.getPromotionalCost();
-
 		double totalApplicablePromotionCost = 0;
 
-		for (Map.Entry<String, Integer> entry : promoDetails.entrySet()) {
-			String key = entry.getKey();
-			Integer val = entry.getValue();
+		if (products != null && promotion != null) {
+			Map<String, Integer> promoDetails = promotion.getPromoDetails();
+			int promotionalCost = promotion.getPromotionalCost();
 
-			List<Product> product = products.stream().filter(p -> p.getSKUId().equals(key))
-					.collect(Collectors.toList());
+			for (Map.Entry<String, Integer> entry : promoDetails.entrySet()) {
+				String key = entry.getKey();
+				Integer val = entry.getValue();
 
-			double productPrice = product.get(0).getPrice();
+				List<Product> product = products.stream().filter(p -> p.getSKUId().equals(key))
+						.collect(Collectors.toList());
 
-			totalApplicablePromotionCost = product.size() / val * promotionalCost + product.size() % val * productPrice;
+				double productPrice = product.get(0).getPrice();
 
+				totalApplicablePromotionCost = product.size() / val * promotionalCost
+						+ product.size() % val * productPrice;
+
+			}
 		}
 
 		return totalApplicablePromotionCost;

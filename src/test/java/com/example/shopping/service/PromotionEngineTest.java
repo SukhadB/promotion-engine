@@ -11,6 +11,8 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.example.shopping.exception.ProductNotPresentInInvetory;
+import com.example.shopping.model.Cart;
 import com.example.shopping.model.Inventory;
 import com.example.shopping.model.Product;
 import com.example.shopping.model.Promotion;
@@ -23,10 +25,15 @@ public class PromotionEngineTest {
 	
 	@Before
     public void setUp() {
-    	products.add(new Product("A", 50));
-    	products.add(new Product("B", 30));
-    	products.add(new Product("C", 20));
-    	products.add(new Product("D", 15));
+    	try {
+			products.add(new Product("A", 50));
+			products.add(new Product("B", 30));
+			products.add(new Product("C", 20));
+			products.add(new Product("D", 15));
+		} catch (ProductNotPresentInInvetory e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	
     	List<Promotion> promotionList = new ArrayList<>();
     	Map<String, Integer> promoDetails1 = new HashMap<>();
@@ -52,7 +59,7 @@ public class PromotionEngineTest {
 	@Test
 	public void promote() {
 		// First Test case to start the Promotion Engine
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		assertEquals(promotionEngine.applyPromotion(cart), 0.0d, 0.001);
 		
 	}
@@ -62,7 +69,7 @@ public class PromotionEngineTest {
 		// Test case to add Product to the cart
 		List<String> order = Arrays.asList("A");
 		
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		cart.add(order);
 		
 		assertEquals(promotionEngine.applyPromotion(cart), 50.0d, 0.001);
@@ -74,7 +81,7 @@ public class PromotionEngineTest {
 		// Test case for scenario A
 		List<String> order = Arrays.asList("A", "B", "C");
 		
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		cart.add(order);
 		
 		assertEquals(promotionEngine.applyPromotion(cart), 100.0d, 0.001);
@@ -85,7 +92,7 @@ public class PromotionEngineTest {
 		// Test case for getting total cart value for scenario B
 		List<String> order = Arrays.asList("A", "A", "A", "A", "A", "B", "B", "B", "B", "B", "C");
 		
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		cart.add(order);
 		
 		assertEquals(promotionEngine.applyPromotion(cart), 370.0d, 0.001);
@@ -97,7 +104,7 @@ public class PromotionEngineTest {
 		// Test case for getting total cart value for scenario C
 		List<String> order = Arrays.asList("A", "A", "A", "B", "B", "B", "B", "B", "C", "D");
 		
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		cart.add(order);
 		
 		assertEquals(promotionEngine.applyPromotion(cart), 280.0d, 0.001);
@@ -108,7 +115,7 @@ public class PromotionEngineTest {
 		// Test case for getting total cart value when C is not added and product D is added
 		List<String> order = Arrays.asList("A", "A", "A", "B", "B", "B", "B", "B", "D");
 		
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		cart.add(order);
 
 		assertEquals(promotionEngine.applyPromotion(cart), 265.0d, 0.001);
@@ -119,7 +126,7 @@ public class PromotionEngineTest {
 		// Test case for getting total cart value when C is not added and product D is added
 		List<String> order = Arrays.asList("A", "A", "A", "B", "B", "B", "B", "B", "C", "C", "D");
 		
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		cart.add(order);
 
 		assertEquals(promotionEngine.applyPromotion(cart), 300.0d, 0.001);
@@ -130,7 +137,7 @@ public class PromotionEngineTest {
 		// Test case for getting total cart value when C is not added and product D is added
 		List<String> order = Arrays.asList("C", "C", "C", "D", "D");
 		
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		cart.add(order);
 
 		assertEquals(promotionEngine.applyPromotion(cart), 80.0d, 0.001);
@@ -141,7 +148,7 @@ public class PromotionEngineTest {
 		// Test case for getting total cart value when C is not added and product D is added
 		List<String> order = Arrays.asList("D", "D", "D", "C", "C");
 		
-		Cart cart = new Cart(promotionEngine, inventory);
+		Cart cart = new Cart(inventory);
 		cart.add(order);
 
 

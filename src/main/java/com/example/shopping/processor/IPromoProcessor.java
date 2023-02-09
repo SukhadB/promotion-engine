@@ -15,6 +15,14 @@ import com.example.shopping.model.Promotion;
  */
 public interface IPromoProcessor {
 
+	/**
+	 * Calculates the total applicable cost of the matching product list and the
+	 * promotion applicable
+	 * 
+	 * @param products  matching set for the promotion
+	 * @param promotion promotion applicable
+	 * @return total cost applicable post applicable promotion is applied
+	 */
 	public double applyPromotion(List<Product> products, Promotion promotion);
 
 }

@@ -55,15 +55,6 @@ public class Promotion {
 
 	}
 
-	/**
-	 * Construct new promotion basis the promotion type provided
-	 * 
-	 * @param processorType - the promotion type
-	 */
-	public Promotion(PromotionProcessorType processorType) {
-		this.processorType = processorType;
-	}
-
 	public String getPromoCode() {
 		return promoCode;
 	}
