@@ -3,7 +3,6 @@ package com.example.shopping.model;
 import java.util.List;
 
 import com.example.shopping.exception.ProductNotPresentInInvetory;
-import com.example.shopping.model.Product;
 
 /**
  * Interface for Cart class to implement the required method
